@@ -35,23 +35,31 @@ class DdgCustomerPlugin
     private $customer;
 
     /**
+     * @var \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory
+     */
+    protected $customerExtensionFactory;
+
+    /**
      * DdgCustomerPlugin constructor.
      *
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory
      * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
      * @param \Magento\Reward\Helper\Data $rewardHelper
+     * @param \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory $customerExtensionFactory
      */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime $dateTime,
         \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
         \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
-        \Magento\Reward\Helper\Data $rewardHelper
+        \Magento\Reward\Helper\Data $rewardHelper,
+        \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory $customerExtensionFactory
     ) {
         $this->dateTime = $dateTime;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
         $this->rewardHelper = $rewardHelper;
+        $this->customerExtensionFactory = $customerExtensionFactory;
     }
 
     /**
@@ -62,11 +70,17 @@ class DdgCustomerPlugin
     public function beforeSetCustomerData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
     {
         $this->customer = $customer;
-        $customer->setData('reward_points', $this->getRewardPoints());
-        $customer->setData('reward_ammount', $this->getRewardAmmount());
-        $customer->setData('expiration_date', $this->getExpirationDate());
-        $customer->setData('last_used_date', $this->getLastUsedDate());
-        $customer->setData('customer_segments', $this->getCustomerSegments());
+
+        $customerExtension = $subject->getExtensionAttributes();
+        if ($customerExtension === null) {
+            $customerExtension = $this->customerExtensionFactory>create();
+        }
+        $customerExtension->setRewardPoints($this->getRewardPoints());
+        $customerExtension->setRewardAmmount($this->getRewardAmmount());
+        $customerExtension->setExpirationDate($this->getExpirationDate());
+        $customerExtension->setLastUsedDate($this->getLastUsedDate());
+        $customerExtension->setCustomerSegments($this->getCustomerSegments());
+        $subject->setExtensionAttributes($customerExtension);
 
         return [$customer];
     }
