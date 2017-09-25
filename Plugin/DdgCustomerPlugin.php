@@ -137,7 +137,7 @@ class DdgCustomerPlugin
     /**
      * Get the customer reward.
      *
-     * @return null
+     * @return void
      */
     public function _setReward()
     {
@@ -181,7 +181,7 @@ class DdgCustomerPlugin
     /**
      * Last used reward points.
      *
-     * @return mixed
+     * @return string
      */
     public function getLastUsedDate()
     {
