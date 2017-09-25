@@ -2,6 +2,10 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
+/**
+ * Class DdgCustomerPlugin
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 class DdgCustomerPlugin
 {
     /**
@@ -35,38 +39,58 @@ class DdgCustomerPlugin
     private $customer;
 
     /**
+     * @var \Dotdigitalgroup\Enterprise\Helper\Data
+     */
+    private $helper;
+
+    /**
      * DdgCustomerPlugin constructor.
      *
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory
      * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
      * @param \Magento\Reward\Helper\Data $rewardHelper
+     * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
      */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime $dateTime,
         \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
         \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
-        \Magento\Reward\Helper\Data $rewardHelper
+        \Magento\Reward\Helper\Data $rewardHelper,
+        \Dotdigitalgroup\Enterprise\Helper\Data $helper
     ) {
         $this->dateTime = $dateTime;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
         $this->rewardHelper = $rewardHelper;
+        $this->helper = $helper;
     }
 
     /**
      * @param \Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject
-     * @param $customer
+     * @param \Magento\Customer\Model\Customer $customer
      * @return mixed
      */
     public function beforeSetCustomerData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
     {
         $this->customer = $customer;
-        $customer->setData('reward_points', $this->getRewardPoints());
-        $customer->setData('reward_ammount', $this->getRewardAmmount());
-        $customer->setData('expiration_date', $this->getExpirationDate());
-        $customer->setData('last_used_date', $this->getLastUsedDate());
-        $customer->setData('customer_segments', $this->getCustomerSegments());
+        $websiteId = $customer->getWebsiteId();
+
+        if ($this->helper->getRewardPointMapping($websiteId)) {
+            $customer->setRewardPoints($this->getRewardPoints());
+        }
+        if ($this->helper->getRewardAmountMapping($websiteId)) {
+            $customer->setRewardAmmount($this->getRewardAmmount());
+        }
+        if ($this->helper->getExpirationDateMapping($websiteId)) {
+            $customer->setExpirationDate($this->getExpirationDate());
+        }
+        if ($this->helper->getLastUsedDateMapping($websiteId)) {
+            $customer->setLastUsedDate($this->getLastUsedDate());
+        }
+        if ($this->helper->getCustomerSegmentMapping($websiteId)) {
+            $customer->setCustomerSegments($this->getCustomerSegments());
+        }
 
         return [$customer];
     }
