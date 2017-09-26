@@ -3,10 +3,10 @@
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
 /**
- * Class DdgCustomerPlugin
+ * Class CustomerPlugin
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
-class DdgCustomerPlugin
+class CustomerPlugin
 {
     /**
      * @var object

@@ -3,10 +3,10 @@
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
 /**
- * Class DdgDataFieldPlugin
+ * Class DataFieldPlugin
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
-class DdgDataFieldPlugin
+class DataFieldPlugin
 {
     /**
      * @var \Dotdigitalgroup\Enterprise\Helper\Data
