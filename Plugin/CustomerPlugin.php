@@ -2,10 +2,14 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-class DdgCustomerPlugin
+/**
+ * Class CustomerPlugin
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
+class CustomerPlugin
 {
     /**
-     * @var object
+     * @var \Magento\Reward\Model\Reward
      */
     private $reward;
 
@@ -40,6 +44,11 @@ class DdgCustomerPlugin
     protected $customerExtensionFactory;
 
     /**
+     * @var \Dotdigitalgroup\Enterprise\Helper\Data
+     */
+    private $helper;
+
+    /**
      * DdgCustomerPlugin constructor.
      *
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
@@ -47,39 +56,55 @@ class DdgCustomerPlugin
      * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
      * @param \Magento\Reward\Helper\Data $rewardHelper
      * @param \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory $customerExtensionFactory
+     * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
      */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime $dateTime,
         \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
         \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
         \Magento\Reward\Helper\Data $rewardHelper,
-        \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory $customerExtensionFactory
+        \Dotdigitalgroup\Email\Model\Apiconnector\CustomerExtensionFactory $customerExtensionFactory,
+        \Dotdigitalgroup\Enterprise\Helper\Data $helper
     ) {
         $this->dateTime = $dateTime;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
         $this->rewardHelper = $rewardHelper;
         $this->customerExtensionFactory = $customerExtensionFactory;
+        $this->helper = $helper;
     }
 
     /**
      * @param \Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject
-     * @param $customer
+     * @param \Magento\Customer\Model\Customer $customer
      * @return mixed
      */
     public function beforeSetCustomerData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
     {
         $this->customer = $customer;
+        $websiteId = $customer->getWebsiteId();
+        $this->reward = false;
 
         $customerExtension = $subject->getExtensionAttributes();
         if ($customerExtension === null) {
             $customerExtension = $this->customerExtensionFactory>create();
         }
-        $customerExtension->setRewardPoints($this->getRewardPoints());
-        $customerExtension->setRewardAmmount($this->getRewardAmmount());
-        $customerExtension->setExpirationDate($this->getExpirationDate());
-        $customerExtension->setLastUsedDate($this->getLastUsedDate());
-        $customerExtension->setCustomerSegments($this->getCustomerSegments());
+
+        if ($this->helper->getRewardPointMapping($websiteId)) {
+            $customerExtension->setRewardPoints($this->getRewardPoints());
+        }
+        if ($this->helper->getRewardAmountMapping($websiteId)) {
+            $customerExtension->setRewardAmmount($this->getRewardAmmount());
+        }
+        if ($this->helper->getExpirationDateMapping($websiteId)) {
+            $customerExtension->setExpirationDate($this->getExpirationDate());
+        }
+        if ($this->helper->getLastUsedDateMapping($websiteId)) {
+            $customerExtension->setLastUsedDate($this->getLastUsedDate());
+        }
+        if ($this->helper->getCustomerSegmentMapping($websiteId)) {
+            $customerExtension->setCustomerSegments($this->getCustomerSegments());
+        }
         $subject->setExtensionAttributes($customerExtension);
 
         return [$customer];
@@ -110,7 +135,7 @@ class DdgCustomerPlugin
      */
     public function getRewardAmmount()
     {
-        if (!$this->reward) {
+        if (! $this->reward) {
             $this->_setReward();
         }
 
@@ -151,16 +176,15 @@ class DdgCustomerPlugin
     /**
      * Get the customer reward.
      *
-     * @return null
+     * @return void
      */
-    public function _setReward()
+    private function _setReward()
     {
-        $rewardData = $this->rewardHelper;
         $historyCollectionFactory = $this->rewardHistoryCollectionFactory;
         $collection = $historyCollectionFactory->create()
             ->addCustomerFilter($this->customer->getId())
             ->addWebsiteFilter($this->customer->getWebsiteId())
-            ->setExpiryConfig($rewardData->getExpiryConfig())
+            ->setExpiryConfig($this->rewardHelper->getExpiryConfig())
             ->addExpirationDate($this->customer->getWebsiteId())
             ->skipExpiredDuplicates()
             ->setDefaultOrder();
@@ -195,7 +219,7 @@ class DdgCustomerPlugin
     /**
      * Last used reward points.
      *
-     * @return mixed
+     * @return string
      */
     public function getLastUsedDate()
     {
