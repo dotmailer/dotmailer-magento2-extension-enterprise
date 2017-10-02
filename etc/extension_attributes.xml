@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Dotdigitalgroup\Email\Model\Apiconnector\CustomerInterface">
+        <attribute code="reward_ammount" type="string">
+            <resources>
+                <resource ref="Dotdigitalgroup_Email::contact"/>
+            </resources>
+        </attribute>
+        <attribute code="expiration_date" type="string">
+            <resources>
+                <resource ref="Dotdigitalgroup_Email::contact"/>
+            </resources>
+        </attribute>
+        <attribute code="last_used_date" type="string">
+            <resources>
+                <resource ref="Dotdigitalgroup_Email::contact"/>
+            </resources>
+        </attribute>
+        <attribute code="customer_segments" type="string">
+            <resources>
+                <resource ref="Dotdigitalgroup_Email::contact"/>
+            </resources>
+        </attribute>
+        <attribute code="reward_points" type="string">
+            <resources>
+                <resource ref="Dotdigitalgroup_Email::contact"/>
+            </resources>
+        </attribute>
+    </extension_attributes>
+</config>
