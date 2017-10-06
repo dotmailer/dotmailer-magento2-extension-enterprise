@@ -44,7 +44,7 @@ class CustomerPlugin
     private $helper;
 
     /**
-     * DdgCustomerPlugin constructor.
+     * CustomerPlugin constructor.
      *
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory

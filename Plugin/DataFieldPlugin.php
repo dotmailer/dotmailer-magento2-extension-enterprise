@@ -14,7 +14,7 @@ class DataFieldPlugin
     private $helper;
 
     /**
-     * DdgHelperPlugin constructor.
+     * DataFieldPlugin constructor.
      * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
      */
     public function __construct(\Dotdigitalgroup\Enterprise\Helper\Data $helper)

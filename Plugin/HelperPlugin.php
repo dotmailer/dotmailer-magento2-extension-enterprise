@@ -14,7 +14,7 @@ class HelperPlugin
     private $helper;
 
     /**
-     * DdgHelperPlugin constructor.
+     * HelperPlugin constructor.
      * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
      */
     public function __construct(\Dotdigitalgroup\Enterprise\Helper\Data $helper)
