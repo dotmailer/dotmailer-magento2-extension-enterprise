@@ -104,7 +104,7 @@ class CustomerPlugin
     public function getRewardPoints()
     {
         if (! $this->reward) {
-            $this->_setReward();
+            $this->setReward();
         }
 
         if ($this->reward !== true) {
@@ -122,7 +122,7 @@ class CustomerPlugin
     public function getRewardAmmount()
     {
         if (!$this->reward) {
-            $this->_setReward();
+            $this->setReward();
         }
 
         if ($this->reward !== true) {
@@ -141,7 +141,7 @@ class CustomerPlugin
     {
         //set reward for later use
         if (!$this->reward) {
-            $this->_setReward();
+            $this->setReward();
         }
 
         if ($this->reward !== true) {
@@ -164,7 +164,7 @@ class CustomerPlugin
      *
      * @return void
      */
-    public function _setReward()
+    public function setReward()
     {
         $rewardData = $this->rewardHelper;
         $historyCollectionFactory = $this->rewardHistoryCollectionFactory;
