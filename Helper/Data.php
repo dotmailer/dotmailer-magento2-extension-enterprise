@@ -3,7 +3,6 @@
 namespace Dotdigitalgroup\Enterprise\Helper;
 
 use Magento\Framework\App\Helper\Context;
-use Dotdigitalgroup\Enterprise\Helper\Config;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
