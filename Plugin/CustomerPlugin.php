@@ -75,6 +75,7 @@ class CustomerPlugin
     {
         $this->customer = $customer;
         $websiteId = $customer->getWebsiteId();
+        $this->reward = false;
 
         if ($this->helper->getRewardPointMapping($websiteId)) {
             $customer->setRewardPoints($this->getRewardPoints());
