@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "dotmailer/dotmailer-magento2-extension": ">=2.2.6",
+    "dotmailer/dotmailer-magento2-extension": ">=2.3.6",
     "magento/module-reward": ">=100 <102",
     "magento/module-customer-segment": ">=100 <102"
   },
