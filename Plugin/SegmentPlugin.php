@@ -112,7 +112,7 @@ class SegmentPlugin
     private function setToReimport($customerIds)
     {
         if (! empty($customerIds)) {
-            $this->contactResource->setNotImportedByCustomerIds($customerIds);
+            $this->contactResource->updateNotImportedByCustomerIds($customerIds);
         }
     }
 }
