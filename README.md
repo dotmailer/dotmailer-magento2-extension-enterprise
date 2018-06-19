@@ -12,6 +12,11 @@ Compatibility
 - Magento >= 2.1.6
 - Dotdigitalgroup Email >= 2.3.6 
 
+## V1.0.1
+
+###### Bug fix
+- We've fixed the method name that had been changed on the Community version
+
 ## V1.0.0
 
 Available additional data fields to be mapped : 
