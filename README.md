@@ -10,7 +10,7 @@ Full support documentation and setup guides available here - https://support.dot
 Compatibility
 -------------
 - Magento >= 2.1.6
-- Dotdigitalgroup Email >= 2.3.6 
+- Dotdigitalgroup Email >= 2.5.4 
 
 ## V1.0.1
 
