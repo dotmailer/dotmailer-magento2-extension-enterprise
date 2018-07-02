@@ -28,7 +28,7 @@ class DataFieldPlugin
      * @param $result
      * @return array
      */
-    public function afterGetEnterpriseDataFields(
+    public function afterGetExtraDataFields(
         \Dotdigitalgroup\Email\Model\Connector\Datafield $subject,
         $result
     ) {

@@ -3,7 +3,7 @@
     <system>
         <section id="connector_data_mapping">
             <tab>ddg_automation</tab>
-            <group id="enterprise_data" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1"
+            <group id="extra_data" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1"
                    showInStore="0">
                 <label>Enterprise Data</label>
                 <field id="reward_points_heading" translate="label" sortOrder="10" showInStore="0" showInWebsite="1"
