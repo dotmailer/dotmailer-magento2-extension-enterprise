@@ -5,6 +5,7 @@
             <module name="Dotdigitalgroup_Email"/>
             <module name="Magento_CustomerSegment"/>
             <module name="Magento_Reward"/>
+            <module name="Magento_Store"/>
         </sequence>
     </module>
 </config>
