@@ -71,7 +71,7 @@ class CustomerPlugin
      * @param \Magento\Customer\Model\Customer $customer
      * @return mixed
      */
-    public function beforeSetCustomerData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
+    public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
     {
         $this->customer = $customer;
         $websiteId = $customer->getWebsiteId();
