@@ -2,7 +2,7 @@
   "name": "dotmailer/dotmailer-magento2-extension-enterprise",
   "description": "dotmailer integration for magento 2 enterprise",
   "type": "magento2-module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "repositories": [
     {
@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "dotmailer/dotmailer-magento2-extension": ">=2.3.6",
+    "dotmailer/dotmailer-magento2-extension": ">=3.0.2",
     "magento/module-reward": ">=100 <102",
     "magento/module-customer-segment": ">=100 <102"
   },
