@@ -12,6 +12,14 @@ Compatibility
 - Magento >= 2.1.6
 - Dotdigitalgroup Email >= 2.5.4 
 
+## V1.0.2
+
+###### Improvements
+- We've added the Magento_Store module as a new dependency
+- We've added a foreign key to the email_order entity using Magento's foreign key framework
+Fixes
+- We've fixed a method name that had been changed on the community version
+
 ## V1.0.1
 
 ###### Bug fix
