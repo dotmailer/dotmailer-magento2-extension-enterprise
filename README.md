@@ -12,6 +12,11 @@ Compatibility
 - Magento >= 2.1.6
 - Dotdigitalgroup Email >= 2.5.4 
 
+## V1.0.3
+
+###### Improvements
+- We've added support for Magento 2.3.1
+
 ## V1.0.2
 
 ###### Improvements
