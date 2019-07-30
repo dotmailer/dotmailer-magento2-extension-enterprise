@@ -21,7 +21,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 'type' => 'numeric',
                 'visibility' => 'private'
             ],
-            'reward_ammount' => [
+            'reward_amount' => [
                 'name' => 'REWARD_AMOUNT',
                 'type' => 'numeric',
                 'visibility' => 'private'
@@ -72,7 +72,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $website = $this->storeManager->getWebsite($website);
         $store = $website->getDefaultStore();
         $mappedData = $this->scopeConfig->getValue(
-            'connector_data_mapping/enterprise_data',
+            'connector_data_mapping/extra_data',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $store->getId()
         );

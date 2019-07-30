@@ -81,7 +81,7 @@ class CustomerPlugin
             $customer->setRewardPoints($this->getRewardPoints());
         }
         if ($this->helper->getRewardAmountMapping($websiteId)) {
-            $customer->setRewardAmmount($this->getRewardAmmount());
+            $customer->setRewardAmount($this->getRewardAmount());
         }
         if ($this->helper->getExpirationDateMapping($websiteId)) {
             $customer->setExpirationDate($this->getExpirationDate());
@@ -119,7 +119,7 @@ class CustomerPlugin
      *
      * @return mixed
      */
-    public function getRewardAmmount()
+    public function getRewardAmount()
     {
         if (!$this->reward) {
             $this->setReward();

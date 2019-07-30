@@ -16,7 +16,7 @@
                     <label>Points</label>
                     <source_model>Dotdigitalgroup\Email\Model\Config\Source\Datamapping\Datafields</source_model>
                 </field>
-                <field id="reward_ammount" translate="label" type="select" sortOrder="30" showInStore="0"
+                <field id="reward_amount" translate="label" type="select" sortOrder="30" showInStore="0"
                        showInWebsite="1" showInDefault="1">
                     <label>Reward Amount</label>
                     <source_model>Dotdigitalgroup\Email\Model\Config\Source\Datamapping\Datafields</source_model>
