@@ -1,16 +1,24 @@
- dotmailer for Magento 2 Enterprise
+ Engagement Cloud for Magento Commerce
  ======
  
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE.md)
 
 ## Description
 
-Full support documentation and setup guides available here - https://support.dotmailer.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options
+This extension provides additional features for merchants running Magento Commerce (previously Magento Enterprise Edition). It must be used alongside the main [Engagement Cloud for Magento 2 extension](https://github.com/dotmailer/dotmailer-magento2-extension). 
 
-Compatibility
--------------
+- [Full support documentation and setup guides](https://support.dotmailer.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options)
+
+## Compatibility
+
 - Magento >= 2.1.6
 - Dotdigitalgroup Email >= 2.5.4 
+
+## 1.0.4
+
+###### Bug fix
+- We've fixed a bug with the syncing of customer reward points and segment data.
+- We've updated a misspelled config key. Merchants are advised to auto-map data fields again following this change.
 
 ## V1.0.3
 
