@@ -71,29 +71,29 @@ class CustomerPlugin
      * @param \Magento\Customer\Model\Customer $customer
      * @return mixed
      */
-    public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject, $customer)
+    public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject)
     {
-        $this->customer = $customer;
-        $websiteId = $customer->getWebsiteId();
+        $this->customer = $subject->getModel();
+        $websiteId = $this->customer->getWebsiteId();
         $this->reward = false;
 
         if ($this->helper->getRewardPointMapping($websiteId)) {
-            $customer->setRewardPoints($this->getRewardPoints());
+            $this->customer->setRewardPoints($this->getRewardPoints());
         }
         if ($this->helper->getRewardAmountMapping($websiteId)) {
-            $customer->setRewardAmount($this->getRewardAmount());
+            $this->customer->setRewardAmount($this->getRewardAmount());
         }
         if ($this->helper->getExpirationDateMapping($websiteId)) {
-            $customer->setExpirationDate($this->getExpirationDate());
+            $this->customer->setExpirationDate($this->getExpirationDate());
         }
         if ($this->helper->getLastUsedDateMapping($websiteId)) {
-            $customer->setLastUsedDate($this->getLastUsedDate());
+            $this->customer->setLastUsedDate($this->getLastUsedDate());
         }
         if ($this->helper->getCustomerSegmentMapping($websiteId)) {
-            $customer->setCustomerSegments($this->getCustomerSegments());
+            $this->customer->setCustomerSegments($this->getCustomerSegments());
         }
 
-        return [$customer];
+        return null;
     }
 
     /**

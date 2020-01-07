@@ -8,6 +8,8 @@ namespace Dotdigitalgroup\Enterprise\Plugin;
  */
 class DataFieldPlugin
 {
+    const DATA_MAPPING_PATH_PREFIX = 'extra_data';
+
     /**
      * @var \Dotdigitalgroup\Enterprise\Helper\Data
      */
@@ -22,16 +24,15 @@ class DataFieldPlugin
         $this->helper = $helper;
     }
 
-
     /**
      * @param \Dotdigitalgroup\Email\Model\Connector\Datafield $subject
      * @param $result
-     * @return array
+     * @return null
      */
-    public function afterGetExtraDataFields(
-        \Dotdigitalgroup\Email\Model\Connector\Datafield $subject,
-        $result
+    public function beforeGetContactDatafields(
+        \Dotdigitalgroup\Email\Model\Connector\Datafield $subject
     ) {
-        return $this->helper->getEnterpriseDataFields();
+        $subject->setContactDatafields($this->helper->getEnterpriseDataFields(), self::DATA_MAPPING_PATH_PREFIX);
+        return null;
     }
 }

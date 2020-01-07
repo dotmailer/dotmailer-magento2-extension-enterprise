@@ -7,11 +7,6 @@ use Magento\Framework\App\Helper\Context;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    public $storeManager;
-
-    /**
      * @var array
      */
     private $contactEnterpriseDataFields
@@ -51,10 +46,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function __construct(
         Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Dotdigitalgroup\Email\Helper\Data $emailHelper
     ) {
-        $this->storeManager = $storeManager;
         $this->emailHelper = $emailHelper;
         parent::__construct($context);
     }
@@ -69,7 +62,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getEnterpriseAttributes($website)
     {
-        $website = $this->storeManager->getWebsite($website);
         $store = $website->getDefaultStore();
         $mappedData = $this->scopeConfig->getValue(
             'connector_data_mapping/extra_data',
