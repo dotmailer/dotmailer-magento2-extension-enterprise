@@ -2,10 +2,6 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-/**
- * Class CustomerPlugin
- * @SuppressWarnings(PHPMD.UnusedFormalParameter)
- */
 class CustomerPlugin
 {
     /**

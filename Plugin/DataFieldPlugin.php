@@ -2,10 +2,6 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-/**
- * Class DataFieldPlugin
- * @SuppressWarnings(PHPMD.UnusedFormalParameter)
- */
 class DataFieldPlugin
 {
     const DATA_MAPPING_PATH_PREFIX = 'extra_data';
