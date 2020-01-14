@@ -2,11 +2,6 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-/**
- * Class SegmentPlugin
- *
- * @SuppressWarnings(PHPMD.UnusedFormalParameter)
- */
 class SegmentPlugin
 {
     /**

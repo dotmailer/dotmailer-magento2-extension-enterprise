@@ -14,6 +14,12 @@ This extension provides additional features for merchants running Magento Commer
 - Magento >= 2.1.6
 - Dotdigitalgroup Email >= 2.5.4 
 
+## 1.0.5
+
+###### What's new
+- We've refactored the plugin that sends enterprise data fields to Engagement Cloud, in line with improvements made to our core module.
+- We've made some minor improvements to the code, as per Magento coding standards. 
+
 ## 1.0.4
 
 ###### Bug fix
