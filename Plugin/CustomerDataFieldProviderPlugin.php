@@ -9,7 +9,7 @@ use Magento\Store\Api\Data\WebsiteInterface;
 class CustomerDataFieldProviderPlugin
 {
     /**
-     * @var Data 
+     * @var Data
      */
     private $helper;
 
@@ -33,6 +33,7 @@ class CustomerDataFieldProviderPlugin
         CustomerDataFieldProvider $customerDataFieldProvider,
         array $result
     ) {
-        return $result += $this->helper->getEnterpriseAttributes($customerDataFieldProvider->getWebsite());
+        $enterpriseAttributes = $this->helper->getEnterpriseAttributes($customerDataFieldProvider->getWebsite()) ?: [];
+        return $result += $enterpriseAttributes;
     }
 }
