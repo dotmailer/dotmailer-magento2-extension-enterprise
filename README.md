@@ -11,8 +11,15 @@ This extension provides additional features for merchants running Magento Commer
 
 ## Compatibility
 
-- Magento >= 2.1.6
-- Dotdigitalgroup Email >= 2.5.4 
+The latest version of this module is compatible with:
+
+- Magento >= 2.2
+- Dotdigitalgroup Email >= 4.3.1
+
+## 1.0.6
+
+###### Fixes
+- We've fixed a regression introduced in 1.0.5, which could cause an error when running the syncs for merchants who had not mapped enterprise data fields.
 
 ## 1.0.5
 
@@ -36,8 +43,9 @@ This extension provides additional features for merchants running Magento Commer
 ###### Improvements
 - We've added the Magento_Store module as a new dependency
 - We've added a foreign key to the email_order entity using Magento's foreign key framework
-Fixes
-- We've fixed a method name that had been changed on the community version
+
+###### Fixes
+- We've fixed a method name that had been changed on the Community version
 
 ## V1.0.1
 
@@ -46,7 +54,7 @@ Fixes
 
 ## V1.0.0
 
-Available additional data fields to be mapped : 
+Available additional data fields to be mapped: 
 
 - Reward Points
 - Reward Amount
