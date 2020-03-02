@@ -32,7 +32,7 @@ class SegmentPlugin
      */
     public function beforeDeleteSegmentCustomers(SegmentResource $segmentResource, Segment $segment)
     {
-        $this->reimportSegmentCustomers($segment);
+        $this->reimportSegmentCustomers($segmentResource, $segment);
     }
 
     /**
@@ -48,24 +48,24 @@ class SegmentPlugin
         $result,
         Segment $segment
     ) {
-        $this->reimportSegmentCustomers($segment);
+        $this->reimportSegmentCustomers($segmentResource, $segment);
         return $result;
     }
 
     /**
+     * @param SegmentResource $segmentResource
      * @param Segment $segment
      */
-    private function reimportSegmentCustomers(Segment $segment)
+    private function reimportSegmentCustomers(SegmentResource $segmentResource, Segment $segment)
     {
-        $segmentResource = $this->segmentResourceFactory->create();
-
-        $customerSegmentQuery = $segmentResource->getConnection()
+        $customerSegmentQuery = $this->segmentResourceFactory->create()
+            ->getConnection()
             ->select()
             ->from($segmentResource->getTable('magento_customersegment_customer'), ['customer_id'])
             ->where('segment_id = ?', $segment->getId())
             ->assemble();
 
-        $segmentResource->getConnection()->update(
+        $this->segmentResourceFactory->create()->getConnection()->update(
             $segmentResource->getTable('email_contact'),
             ['email_imported' => 0],
             ['customer_id IN (?)' => new \Zend_Db_Expr($customerSegmentQuery)]
