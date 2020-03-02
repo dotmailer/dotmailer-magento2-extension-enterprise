@@ -2,55 +2,112 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-use Magento\CustomerSegment\Model\Segment;
-use Magento\CustomerSegment\Model\ResourceModel\Segment as SegmentResource;
-
 class SegmentPlugin
 {
     /**
-     * Reimport customers from the segment before it is changed
-     *
-     * @param SegmentResource $segmentResource
-     * @param Segment $segment
+     * @var \Magento\CustomerSegment\Model\ResourceModel\Report\Customer\Collection
      */
-    public function beforeDeleteSegmentCustomers(SegmentResource $segmentResource, Segment $segment)
-    {
-        $this->reimportSegmentCustomers($segmentResource, $segment);
-    }
+    private $customerCollection;
 
     /**
-     * Reimport customers following any change in conditions
-     *
-     * @param SegmentResource $segmentResource
-     * @param $result
-     * @param Segment $segment
-     * @return SegmentResource
+     * @var \Dotdigitalgroup\Email\Model\ResourceModel\Contact
      */
-    public function afterAggregateMatchedCustomers(
-        SegmentResource $segmentResource,
-        $result,
-        Segment $segment
+    private $contactResource;
+
+    /**
+     * SegmentPlugin constructor.
+     *
+     * @param \Magento\CustomerSegment\Model\ResourceModel\Report\Customer\Collection $customerCollection
+     * @param \Dotdigitalgroup\Email\Model\ResourceModel\Contact $contactResource
+     */
+    public function __construct(
+        \Magento\CustomerSegment\Model\ResourceModel\Report\Customer\Collection $customerCollection,
+        \Dotdigitalgroup\Email\Model\ResourceModel\Contact $contactResource
     ) {
-        $this->reimportSegmentCustomers($segmentResource, $segment);
-        return $result;
+        $this->customerCollection = $customerCollection;
+        $this->contactResource = $contactResource;
     }
 
     /**
-     * @param SegmentResource $segmentResource
-     * @param Segment $segment
+     * @param \Magento\CustomerSegment\Model\ResourceModel\Segment $subject
+     * @param \Magento\CustomerSegment\Model\Segment $segment
      */
-    private function reimportSegmentCustomers(SegmentResource $segmentResource, Segment $segment)
-    {
-        $customerSegmentQuery = $segmentResource->getConnection()
-            ->select()
-            ->from($segmentResource->getTable('magento_customersegment_customer'), ['customer_id'])
-            ->where('segment_id = ?', $segment->getId())
-            ->assemble();
+    public function beforeDeleteSegmentCustomers(
+        \Magento\CustomerSegment\Model\ResourceModel\Segment $subject,
+        $segment
+    ) {
+        $customers = $this->customerCollection->addSegmentFilter($segment);
+        $customerIds = $customers->getColumnValues('entity_id');
+        $this->setToReimport($customerIds);
+    }
 
-        $segmentResource->getConnection()->update(
-            $segmentResource->getTable('email_contact'),
-            ['email_imported' => 0],
-            ['customer_id IN (?)' => new \Zend_Db_Expr($customerSegmentQuery)]
-        );
+    /**
+     * @param \Magento\CustomerSegment\Model\ResourceModel\Segment $subject
+     * @param $result
+     * @param \Magento\CustomerSegment\Model\Segment $segment
+     * @param string $select
+     *
+     * @return \Magento\CustomerSegment\Model\ResourceModel\Segment
+     */
+    public function afterSaveCustomersFromSelect(
+        \Magento\CustomerSegment\Model\ResourceModel\Segment $subject,
+        $result,
+        $segment,
+        $select
+    ) {
+        $connection = $subject->getConnection();
+        $stmt = $connection->query($select);
+        $rows = $stmt->fetchAll();
+        $customerIds = [];
+
+        foreach ($rows as $row) {
+            $customerIds[] = $row['entity_id'];
+        }
+
+        $this->setToReimport($customerIds);
+
+        return $subject;
+    }
+
+    /**
+     * @param \Magento\CustomerSegment\Model\ResourceModel\Segment $subject
+     * @param \Closure $proceed
+     * @param $segment
+     *
+     * @return \Magento\CustomerSegment\Model\ResourceModel\Segment
+     */
+    public function aroundAggregateMatchedCustomers(
+        \Magento\CustomerSegment\Model\ResourceModel\Segment $subject,
+        \Closure $proceed,
+        $segment
+    ) {
+        //original call
+        $proceed($segment);
+
+        $websiteIds = $segment->getWebsiteIds();
+        $customerIds = [];
+
+        foreach ($websiteIds as $websiteId) {
+            //get customers ids that satisfy conditions
+            $ids = $segment->getConditions()->getSatisfiedIds($websiteId);
+            if (is_array($ids)) {
+                $customerIds = array_merge($customerIds, $ids);
+            }
+        }
+        $this->setToReimport($customerIds);
+
+        return $subject;
+    }
+
+    /**
+     * Set contact to re-import
+     *
+     * @param $customerIds
+     */
+    private function setToReimport($customerIds)
+    {
+        if (! empty($customerIds)) {
+            $this->contactResource->updateNotImportedByCustomerIds($customerIds);
+        }
     }
 }
