@@ -16,6 +16,12 @@ The latest version of this module is compatible with:
 - Magento >= 2.2
 - Dotdigitalgroup Email >= 4.3.1
 
+## 1.0.7 
+
+###### Fixes
+
+- We've optimised the plugin that is triggered when creating new customer segments, to resolve possible 'out of memory' errors for merchants with large customer databases.
+
 ## 1.0.6
 
 ###### Fixes
