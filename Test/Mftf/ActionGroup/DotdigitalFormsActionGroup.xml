@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="assertBlockExists">
+        <arguments>
+            <argument name="contentType"/>
+            <argument name="containerTargetType" defaultValue="PageBuilderRowContentType"/>
+            <argument name="containerTargetIndex" defaultValue="1" type="string"/>
+        </arguments>
+        <waitForElementVisible time="30" selector="{{PageBuilderPanel.draggableContentTypeInPanel(contentType.name)}}" stepKey="waitForContentTypeInPanel"/>
+    </actionGroup>
+    <actionGroup name="ResetAccountDataCLI">
+        <magentoCLI command="config:set connector_api_credentials/api/enabled 0" stepKey="disableDotdigitalAccount"/>
+        <magentoCLI command="config:set connector_api_credentials/api/username ''" stepKey="deleteApiUser"/>
+        <magentoCLI command="config:set connector_api_credentials/api/password '" stepKey="deleteApiPassword"/>
+    </actionGroup>
+</actionGroups>
