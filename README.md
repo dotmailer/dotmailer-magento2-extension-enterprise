@@ -16,6 +16,13 @@ The latest version of this module is compatible with:
 - Magento >= 2.2
 - Dotdigitalgroup Email >= 4.3.1
 
+## 1.2.0-RC1
+
+###### What's new
+- Merchants can now use Page Builder to embed pages and forms from Engagement Cloud. Form submissions can be captured and stored as Magento newsletter subscribers. 
+
+_This is a preview release. It requires v4.7.0-RC2 of our Email module to function correctly. v1.2.0 of this Enterprise module will no longer be compatible with Magento 2.2._
+
 ## 1.0.7 
 
 ###### Fixes
