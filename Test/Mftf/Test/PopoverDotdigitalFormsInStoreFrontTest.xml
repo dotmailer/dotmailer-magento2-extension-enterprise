@@ -12,12 +12,12 @@
             <group value="dotdigitalCommerce"/>
         </annotations>
         <before>
-            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
             <actionGroup ref="SetDotmailerAccountData" stepKey="SetDotmailerAccountData"/>
             <createData entity="_defaultCmsPage" stepKey="createCMSPage"/>
         </before>
         <after>
-            <actionGroup ref="logout" stepKey="logout"/>
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logout"/>
             <actionGroup ref="ResetAccountDataCLI" stepKey="resetAccount"/>
             <deleteData createDataKey="createCMSPage" stepKey="deletePreReqCMSPage"/>
         </after>
