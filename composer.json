@@ -15,7 +15,7 @@
     "magento/module-reward": ">=100 <102",
     "magento/module-customer-segment": ">=100 <103",
     "magento/module-store": ">=100 <102",
-    "magento/page-builder-commerce": ">=1.1.0"
+    "magento/page-builder-commerce": ">=1.0.0"
   },
   "autoload": {
     "files": [ "registration.php" ],

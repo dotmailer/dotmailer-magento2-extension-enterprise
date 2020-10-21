@@ -13,7 +13,7 @@ This extension provides additional features for merchants running Magento Commer
 
 The latest version of this module is compatible with:
 
-- Magento >= 2.3
+- Magento >= 2.3.1
 - Dotdigitalgroup Email >= 4.8.0
 
 ## 1.3.0
