@@ -13,13 +13,24 @@ This extension provides additional features for merchants running Magento Commer
 
 The latest version of this module is compatible with:
 
-- Magento >= 2.2
-- Dotdigitalgroup Email >= 4.3.1
+- Magento >= 2.3.1
+- Dotdigitalgroup Email >= 4.8.0
+
+## 1.3.0
+
+###### Improvements
+- We've updated our composer dependencies to include `magento/page-builder-commerce`.
+
+## 1.2.0
+
+###### What's new
+- Merchants can now use Page Builder to embed pages and forms from Engagement Cloud. Form submissions can be captured and stored as Magento newsletter subscribers. 
+
+_v1.2.0 of this Enterprise module is no longer compatible with Magento 2.2._
 
 ## 1.0.7 
 
 ###### Fixes
-
 - We've optimised the plugin that is triggered when creating new customer segments, to resolve possible 'out of memory' errors for merchants with large customer databases.
 
 ## 1.0.6
