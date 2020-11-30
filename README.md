@@ -7,7 +7,7 @@
 
 This extension provides additional features for merchants running Magento Commerce (previously Magento Enterprise Edition). It must be used alongside the main [Engagement Cloud for Magento 2 extension](https://github.com/dotmailer/dotmailer-magento2-extension). 
 
-- [Full support documentation and setup guides](https://support.dotmailer.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options)
+- [Full support documentation and setup guides](https://support.dotdigital.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options)
 
 ## Compatibility
 
