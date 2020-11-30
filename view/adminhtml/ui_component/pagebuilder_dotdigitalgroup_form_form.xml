@@ -285,4 +285,24 @@
             </formElements>
         </field>
     </fieldset>
+    <field name="script_src" formElement="hidden" sortOrder="110">
+        <settings>
+            <dataType>text</dataType>
+        </settings>
+    </field>
+    <field name="form_page_id" formElement="hidden" sortOrder="120">
+        <settings>
+            <dataType>text</dataType>
+        </settings>
+    </field>
+    <field name="form_domain" formElement="hidden" sortOrder="130">
+        <settings>
+            <dataType>text</dataType>
+        </settings>
+    </field>
+    <field name="form_sharing" formElement="hidden" sortOrder="140">
+        <settings>
+            <dataType>text</dataType>
+        </settings>
+    </field>
 </form>
