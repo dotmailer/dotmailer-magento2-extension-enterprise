@@ -22,11 +22,12 @@ class DataFieldPlugin
 
     /**
      * @param \Dotdigitalgroup\Email\Model\Connector\Datafield $subject
-     * @param $result
+     * @param bool $withXmlPathPrefixes
      * @return null
      */
     public function beforeGetContactDatafields(
-        \Dotdigitalgroup\Email\Model\Connector\Datafield $subject
+        \Dotdigitalgroup\Email\Model\Connector\Datafield $subject,
+        bool $withXmlPathPrefixes
     ) {
         $subject->setContactDatafields($this->helper->getEnterpriseDataFields(), self::DATA_MAPPING_PATH_PREFIX);
         return null;
