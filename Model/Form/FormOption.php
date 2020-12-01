@@ -4,7 +4,7 @@ namespace Dotdigitalgroup\Enterprise\Model\Form;
 
 use Dotdigitalgroup\Enterprise\Api\Data\FormOptionInterface;
 
-class FormOption extends \Magento\Framework\Api\AbstractExtensibleObject implements FormOptionInterface
+class FormOption extends \Magento\Framework\Api\AbstractSimpleObject implements FormOptionInterface
 {
     /**
      * @return string
