@@ -12,23 +12,25 @@ define([
             imports: {
                 accessToken: '${ $.provider }:data.magento_api_access_token',
                 baseUrl: '${ $.provider }:data.base_url',
-                accountId: '${ $.provider }:data.account_select',
+                accountId: '${ $.provider }:data.account_select'
             },
             listens: {
                 accessToken: 'setApiAccessToken',
                 baseUrl: 'setBaseUrl',
-                accountId: 'fetchECForms',
+                accountId: 'fetchECForms'
             },
-            previouslySelectedValue: '',
+            previouslySelectedValue: ''
         },
 
         /**
          * Dependently display dropdown component if it contains more than one option
          *
+         * @param {Object} data
          * @returns {Object} Chainable
          */
         setOptions: function (data) {
             this._super(data);
+
             if (this.options().length) {
                 this.value(this.previouslySelectedValue);
                 this.setDisabled(false);
@@ -37,10 +39,13 @@ define([
             return this;
         },
 
+        /**
+         * @param {String} websiteId
+         */
         fetchECForms: function (websiteId) {
             var _this2 = this;
 
-            if (!websiteId || typeof websiteId === "undefined") {
+            if (!websiteId || typeof websiteId === 'undefined') {
                 return;
             }
 
@@ -53,18 +58,28 @@ define([
                 method: 'GET',
                 dataType: 'JSON',
                 contentType: 'application/json',
+
+                /**
+                 * @param {Object} xhr
+                 */
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader ('Authorization', 'Bearer ' + _this2.token);
-                },
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + _this2.token);
+                }
             }).done(function (response) {
                 _this2.setOptions(response);
             });
         },
 
+        /**
+         * @param {String} token
+         */
         setApiAccessToken: function (token) {
             this.token = token;
         },
 
+        /**
+         * @param {String} baseUrl
+         */
         setBaseUrl: function (baseUrl) {
             url.setBaseUrl(baseUrl);
         }

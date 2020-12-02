@@ -1,11 +1,10 @@
 define([
     'jquery',
-    'mage/url',
+    'mage/url'
 ], function ($, url) {
     'use strict';
 
     return function (config, element) {
-
         let formId = $(element).find('iframe').attr('id');
         let shouldSubscribe = $(element).find('script').data('add-respondent') === 1;
 
@@ -19,8 +18,8 @@ define([
             if (shouldSubscribe && hasContactEmail) {
                 $.post(url.build('newsletter/subscriber/new'), {
                     email: formData.contactEmail
-                }).done(function() {
-                    window.scrollTo(0,0);
+                }).done(function () {
+                    window.scrollTo(0, 0);
                     window.location.reload();
                 });
             }
