@@ -4,7 +4,7 @@ namespace Dotdigitalgroup\Enterprise\Model\Form;
 
 use Dotdigitalgroup\Enterprise\Api\Data\FormDataInterface;
 
-class FormData extends \Magento\Framework\Api\AbstractExtensibleObject implements FormDataInterface
+class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements FormDataInterface
 {
     /**
      * @return string
