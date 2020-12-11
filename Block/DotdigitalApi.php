@@ -6,6 +6,11 @@ namespace Dotdigitalgroup\Enterprise\Block;
 use Dotdigitalgroup\Email\Helper\Data;
 use Magento\Framework\View\Element\Template;
 
+/**
+ * DotdigitalApi block
+ *
+ * @api
+ */
 class DotdigitalApi extends \Magento\Framework\View\Element\Template
 {
     /**
