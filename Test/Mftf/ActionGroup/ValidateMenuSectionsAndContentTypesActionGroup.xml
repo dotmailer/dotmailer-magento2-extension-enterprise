@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="validateMenuSectionsAndContentTypes">
+        <annotations>
+            <description>Merges with the core action group. When the dotdigital extension is enabled, we expect 4 content types to be listed.</description>
+        </annotations>
+        <seeNumberOfElements selector="{{PageBuilderPanel.allMenuSectionContentTypes('add_content')}}" userInput="4" stepKey="seeNumberOfAddContentMenuSectionContentTypes" after="clickAddContentMenuSection"/>
+    </actionGroup>
+</actionGroups>
