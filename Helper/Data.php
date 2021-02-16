@@ -62,11 +62,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getEnterpriseAttributes($website)
     {
-        $store = $website->getDefaultStore();
         $mappedData = $this->scopeConfig->getValue(
             'connector_data_mapping/extra_data',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            $store->getId()
+            \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES,
+            $website->getId()
         );
 
         return $mappedData;
