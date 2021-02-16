@@ -2,17 +2,24 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
+use Magento\Reward\Model\ResourceModel\Reward\CollectionFactory;
+
 class CustomerPlugin
 {
     /**
      * @var object
      */
-    private $reward;
+    private $rewardDataFromHistory;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime
      */
     private $dateTime;
+
+    /**
+     * @var CollectionFactory
+     */
+    private $rewardCollectionFactory;
 
     /**
      * @var \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory
@@ -43,6 +50,7 @@ class CustomerPlugin
      * CustomerPlugin constructor.
      *
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
+     * @param CollectionFactory $rewardCollectionFactory
      * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory
      * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
      * @param \Magento\Reward\Helper\Data $rewardHelper
@@ -50,12 +58,14 @@ class CustomerPlugin
      */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime $dateTime,
+        CollectionFactory $rewardCollectionFactory,
         \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
         \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
         \Magento\Reward\Helper\Data $rewardHelper,
         \Dotdigitalgroup\Enterprise\Helper\Data $helper
     ) {
         $this->dateTime = $dateTime;
+        $this->rewardCollectionFactory = $rewardCollectionFactory;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
         $this->rewardHelper = $rewardHelper;
@@ -71,7 +81,7 @@ class CustomerPlugin
     {
         $this->customer = $subject->getModel();
         $websiteId = $this->customer->getWebsiteId();
-        $this->reward = false;
+        $this->rewardDataFromHistory = false;
 
         if ($this->helper->getRewardPointMapping($websiteId)) {
             $this->customer->setRewardPoints($this->getRewardPoints());
@@ -93,18 +103,19 @@ class CustomerPlugin
     }
 
     /**
-     * Reward points balance.
+     * Fetch reward points balance from the magento_reward table.
+     * [Not from magento_reward_history because that doesn't accurately factor in expired rewards.]
      *
-     * @return int
+     * @return string
      */
     public function getRewardPoints()
     {
-        if (! $this->reward) {
-            $this->setReward();
-        }
+        $collection = $this->rewardCollectionFactory->create()
+            ->addFieldToFilter('customer_id', $this->customer->getId())
+            ->addWebsiteFilter($this->customer->getWebsiteId());
 
-        if ($this->reward !== true) {
-            return $this->reward->getPointsBalance();
+        if ($collection->getSize()) {
+            return $collection->getFirstItem()->getPointsBalance();
         }
 
         return '';
@@ -117,12 +128,12 @@ class CustomerPlugin
      */
     public function getRewardAmount()
     {
-        if (!$this->reward) {
-            $this->setReward();
+        if (!$this->rewardDataFromHistory) {
+            $this->setRewardDataFromHistory();
         }
 
-        if ($this->reward !== true) {
-            return $this->reward->getCurrencyAmount();
+        if ($this->rewardDataFromHistory !== true) {
+            return $this->rewardDataFromHistory->getCurrencyAmount();
         }
 
         return '';
@@ -136,12 +147,12 @@ class CustomerPlugin
     public function getExpirationDate()
     {
         //set reward for later use
-        if (!$this->reward) {
-            $this->setReward();
+        if (!$this->rewardDataFromHistory) {
+            $this->setRewardDataFromHistory();
         }
 
-        if ($this->reward !== true) {
-            $expiredAt = $this->reward->getExpirationDate();
+        if ($this->rewardDataFromHistory !== true) {
+            $expiredAt = $this->rewardDataFromHistory->getExpirationDate();
 
             if ($expiredAt) {
                 $date = $this->dateTime->formatDate($expiredAt, true);
@@ -160,7 +171,7 @@ class CustomerPlugin
      *
      * @return void
      */
-    public function setReward()
+    public function setRewardDataFromHistory()
     {
         $rewardData = $this->rewardHelper;
         $historyCollectionFactory = $this->rewardHistoryCollectionFactory;
@@ -176,7 +187,7 @@ class CustomerPlugin
             ->setCurPage(1)
             ->getFirstItem();
 
-        $this->reward = $item;
+        $this->rewardDataFromHistory = $item;
     }
 
     /**
