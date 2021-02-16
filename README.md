@@ -16,6 +16,16 @@ The latest version of this module is compatible with:
 - Magento >= 2.3.1
 - Dotdigitalgroup Email >= 4.8.0
 
+## 1.5.0
+
+###### Improvements
+- This release includes a number of minor updates bundled with Magento 2.4.2, mainly fixes for static and MFTF tests.
+
+###### Bug fixes
+- We now retrieve the reward points balance from a different table, so an accurate balance is shown in Engagement Cloud.
+- We've added a plugin to fetch product entity ids for grouped product children. This fixes a bug in Magento Commerce to do with linking from a grouped product to its parent product, where the wrong URL or image path was returned in catalog sync and cart insight.
+- Data field mappings are now retrieved in website scope, instead of store scope.
+
 ## 1.3.1
 
 ###### Bug fixes
