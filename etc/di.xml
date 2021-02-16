@@ -15,6 +15,9 @@
         <plugin name="ddg_customer_segment_resource" type="Dotdigitalgroup\Enterprise\Plugin\SegmentPlugin"
                 sortOrder="1"/>
     </type>
+    <type name="Magento\GroupedProduct\Model\Product\Type\Grouped">
+        <plugin name="ddg_grouped_product_type" type="Dotdigitalgroup\Enterprise\Plugin\GroupedProductTypePlugin" sortOrder="1"/>
+    </type>
     <type name="Magento\Framework\ForeignKey\ConstraintProcessor">
         <arguments>
             <argument name="strategies" xsi:type="array">
