@@ -4,6 +4,7 @@ namespace Dotdigitalgroup\Enterprise\Model\Config\Source\PageBuilder;
 
 use Dotdigitalgroup\Email\Helper\Data;
 use Magento\Store\Model\StoreManagerInterface;
+use Dotdigitalgroup\Email\Logger\Logger;
 
 class Accounts implements \Magento\Framework\Data\OptionSourceInterface
 {
@@ -23,15 +24,22 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
     private $accountIds = [];
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * Accounts constructor.
-     *
      * @param Data $data
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param StoreManagerInterface $storeManager
+     * @param Logger $logger
      */
     public function __construct(
         Data $data,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        Logger $logger
     ) {
+        $this->logger = $logger;
         $this->helper = $data;
         $this->storeManager = $storeManager;
     }
@@ -93,8 +101,10 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
         $accountInfo = $this->helper->getWebsiteApiClient($websiteId)
             ->getAccountInfo();
 
-        if (in_array($accountInfo->id, $this->accountIds)) {
-            return false;
+        if (!isset($accountInfo->id) || in_array($accountInfo->id, $this->accountIds)) {
+            $this->logger->debug(sprintf("Could not find account owner email for website %s", $websiteId));
+
+            return 'Account owner email not found';
         }
 
         $this->accountIds[] = $accountInfo->id;
