@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "php": "^7.1",
         "dotmailer/dotmailer-magento2-extension": "^4.8.0",
         "magento/framework": ">=101 <104",
         "magento/framework-foreign-key": ">=1.0.0",
