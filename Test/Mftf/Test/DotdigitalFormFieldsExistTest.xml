@@ -10,6 +10,7 @@
             <description value="Confirms that the expected settings are visible for the dotdigital form content type."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
+            <testCaseId value="BUNDLE-2738"/>
         </annotations>
         <before>
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>

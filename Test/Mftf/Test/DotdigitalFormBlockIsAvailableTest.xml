@@ -10,6 +10,7 @@
             <description value="Validates that the dotdigital form content type is available to use in Page Builder."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
+            <testCaseId value="BUNDLE-2738"/>
         </annotations>
         <before>
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
