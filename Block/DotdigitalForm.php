@@ -4,14 +4,15 @@
 namespace Dotdigitalgroup\Enterprise\Block;
 
 use Dotdigitalgroup\Email\Helper\Data;
+use Dotdigitalgroup\Enterprise\Model\Token\MagentoApiAccessToken;
 use Magento\Framework\View\Element\Template;
 
 /**
- * DotdigitalApi block
+ * DotdigitalForm block
  *
  * @api
  */
-class DotdigitalApi extends \Magento\Framework\View\Element\Template
+class DotdigitalForm extends \Magento\Framework\View\Element\Template
 {
     /**
      * @var Data
@@ -19,18 +20,26 @@ class DotdigitalApi extends \Magento\Framework\View\Element\Template
     private $emailHelper;
 
     /**
-     * DotdigitalApi constructor.
+     * @var MagentoApiAccessToken
+     */
+    private $magentoApiAccessToken;
+
+    /**
+     * DotdigitalForm constructor.
      * @param Template\Context $context
      * @param Data $emailHelper
+     * @param MagentoApiAccessToken $magentoApiAccessToken
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Data $emailHelper,
+        MagentoApiAccessToken $magentoApiAccessToken,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->emailHelper = $emailHelper;
+        $this->magentoApiAccessToken = $magentoApiAccessToken;
     }
 
     /**
@@ -57,5 +66,13 @@ class DotdigitalApi extends \Magento\Framework\View\Element\Template
                 ['_fragment' => 'cms_pagebuilder']
             )
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiAccessToken()
+    {
+        return $this->magentoApiAccessToken->getTokenForPreview();
     }
 }
