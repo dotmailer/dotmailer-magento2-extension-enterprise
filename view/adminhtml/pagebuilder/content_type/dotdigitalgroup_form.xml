@@ -48,7 +48,6 @@
         </appearances>
         <additional_data>
             <item name="formConfig" xsi:type="array">
-                <item name="token" xsi:type="object">\Dotdigitalgroup\Enterprise\Model\Config\ContentType\AdditionalData\Provider\MagentoApiAccessToken</item>
                 <item name="baseUrl" xsi:type="object">\Dotdigitalgroup\Enterprise\Model\Config\ContentType\AdditionalData\Provider\BaseUrl</item>
             </item>
         </additional_data>

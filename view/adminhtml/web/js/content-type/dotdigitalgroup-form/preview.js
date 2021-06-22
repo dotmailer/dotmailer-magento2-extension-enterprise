@@ -26,7 +26,7 @@ define([
                 UNKNOWN_ERROR: (0, _translate)('An unknown error occurred. Please try again.')
             };
             _this.placeholderText = _knockout.observable(_this.messages.NOT_SELECTED);
-            _this.accessToken = this.contentType.config.additional_data.formConfig.token;
+            _this.accessToken = _module.config().token;
             _this.baseUrl = this.contentType.config.additional_data.formConfig.baseUrl;
 
             _events.on('contentType:mountAfter', function (args) {
