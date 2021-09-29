@@ -10,6 +10,7 @@
             <description value="A form that is selected, with 'Embedded' style, is visible after save on the store front."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
+            <testCaseId value="BUNDLE-2739"/>
         </annotations>
         <before>
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>

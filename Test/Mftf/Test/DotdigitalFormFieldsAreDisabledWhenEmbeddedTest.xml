@@ -10,6 +10,7 @@
             <description value="Setting Style to 'Embedded' disables most other settings."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
+            <testCaseId value="BUNDLE-2738"/>
         </annotations>
         <before>
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
