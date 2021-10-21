@@ -4,8 +4,8 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormFieldsAreDisabledWhenEmbedded">
         <annotations>
-            <features value="Engagement Cloud for Magento Commerce module"/>
-            <stories value="dotdigital form content type for Page Builder"/>
+            <features value="Dotdigital for Magento Commerce module"/>
+            <stories value="Dotdigital form content type for Page Builder"/>
             <title value="Form fields are disabled when the Embedded style is selected"/>
             <description value="Setting Style to 'Embedded' disables most other settings."/>
             <severity value="AVERAGE"/>

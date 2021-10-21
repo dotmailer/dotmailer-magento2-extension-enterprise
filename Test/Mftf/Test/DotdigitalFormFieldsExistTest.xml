@@ -4,10 +4,10 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormFieldsExist">
         <annotations>
-            <features value="Engagement Cloud for Magento Commerce module"/>
-            <stories value="dotdigital form content type for Page Builder"/>
+            <features value="Dotdigital for Magento Commerce module"/>
+            <stories value="Dotdigital form content type for Page Builder"/>
             <title value="The expected settings are visible"/>
-            <description value="Confirms that the expected settings are visible for the dotdigital form content type."/>
+            <description value="Confirms that the expected settings are visible for the Dotdigital form content type."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
             <testCaseId value="BUNDLE-2738"/>

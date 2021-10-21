@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_PageBuilder:etc/content_type.xsd">
     <type name="dotdigitalgroup_form"
-          label="dotdigital form"
+          label="Dotdigital form"
           menu_section="add_content"
           component="Magento_PageBuilder/js/content-type"
           preview_component="Dotdigitalgroup_Enterprise/js/content-type/dotdigitalgroup-form/preview"

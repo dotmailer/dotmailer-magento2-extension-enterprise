@@ -4,10 +4,10 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormBlockShowsInactiveMessageIfApiIsNotEnabled">
         <annotations>
-            <features value="Engagement Cloud for Magento Commerce module"/>
-            <stories value="dotdigital form content type for Page Builder"/>
-            <title value="Test the inactive state of the dotdigital form content type"/>
-            <description value="If there is no dotdigital API connection, the content type will display a notice when dragged to the stage."/>
+            <features value="Dotdigital for Magento Commerce module"/>
+            <stories value="Dotdigital form content type for Page Builder"/>
+            <title value="Test the inactive state of the Dotdigital form content type"/>
+            <description value="If there is no Dotdigital API connection, the content type will display a notice when dragged to the stage."/>
             <severity value="AVERAGE"/>
             <group value="dotdigitalCommerce"/>
         </annotations>

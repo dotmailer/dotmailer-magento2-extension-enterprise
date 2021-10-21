@@ -59,7 +59,7 @@ class DotdigitalForm extends \Magento\Framework\View\Element\Template
     public function getActivationMessage(): \Magento\Framework\Phrase
     {
         return __(
-            "An active dotdigital Engagement Cloud account is required to use this feature.
+            "An active Dotdigital account is required to use this feature.
              Please enable your account <a href='%1' target='_blank'>here</a>.",
             $this->_urlBuilder->getUrl(
                 'adminhtml/system_config/edit/section/connector_api_credentials',

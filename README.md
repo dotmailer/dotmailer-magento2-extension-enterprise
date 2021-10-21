@@ -1,11 +1,11 @@
- Engagement Cloud for Magento Commerce
- ======
+Dotdigital for Magento Commerce
+======
  
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE.md)
 
 ## Description
 
-This extension provides additional features for merchants running Magento Commerce (previously Magento Enterprise Edition). It must be used alongside the main [Engagement Cloud for Magento 2 extension](https://github.com/dotmailer/dotmailer-magento2-extension). 
+This extension provides additional features for merchants running Magento Commerce (previously Magento Enterprise Edition). It must be used alongside the main [Dotdigital for Magento 2 extension](https://github.com/dotmailer/dotmailer-magento2-extension). 
 
 - [Full support documentation and setup guides](https://support.dotdigital.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options)
 
@@ -22,7 +22,7 @@ The latest version of this module is compatible with:
 - This release includes a number of minor updates bundled with Magento 2.4.2, mainly fixes for static and MFTF tests.
 
 ###### Bug fixes
-- We now retrieve the reward points balance from a different table, so an accurate balance is shown in Engagement Cloud.
+- We now retrieve the reward points balance from a different table, so an accurate balance is shown in Dotdigital.
 - We've added a plugin to fetch product entity ids for grouped product children. This fixes a bug in Magento Commerce to do with linking from a grouped product to its parent product, where the wrong URL or image path was returned in catalog sync and cart insight.
 - Data field mappings are now retrieved in website scope, instead of store scope.
 
@@ -39,7 +39,7 @@ The latest version of this module is compatible with:
 ## 1.2.0
 
 ###### What's new
-- Merchants can now use Page Builder to embed pages and forms from Engagement Cloud. Form submissions can be captured and stored as Magento newsletter subscribers. 
+- Merchants can now use Page Builder to embed pages and forms from Dotdigital. Form submissions can be captured and stored as Magento newsletter subscribers. 
 
 _v1.2.0 of this Enterprise module is no longer compatible with Magento 2.2._
 
@@ -56,7 +56,7 @@ _v1.2.0 of this Enterprise module is no longer compatible with Magento 2.2._
 ## 1.0.5
 
 ###### What's new
-- We've refactored the plugin that sends enterprise data fields to Engagement Cloud, in line with improvements made to our core module.
+- We've refactored the plugin that sends enterprise data fields to Dotdigital, in line with improvements made to our core module.
 - We've made some minor improvements to the code, as per Magento coding standards. 
 
 ## 1.0.4

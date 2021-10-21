@@ -3,11 +3,11 @@
           xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
 
     <entity name="PageBuilderDotdigitalFormsContentType" type="pagebuilder_content_type">
-        <data key="name">dotdigital form</data>
+        <data key="name">Dotdigital form</data>
         <data key="section">Add Content</data>
         <data key="role">dotdigital-form</data>
-        <data key="editPanelName">dotdigital form</data>
-        <data key="pageNamePrefix">dotdigital form</data>
+        <data key="editPanelName">Dotdigital form</data>
+        <data key="pageNamePrefix">Dotdigital form</data>
     </entity>
     <entity name="DotdigitalFormStyle_Embedded" type="dotdigital_form_field_property">
         <data key="name">Style</data>
@@ -29,7 +29,7 @@
         <data key="value">Test form</data>
     </entity>
     <entity name="DotdigitalFormSettings_AccountSelect" type="dotdigital_form_field_property">
-        <data key="name">Select dotdigital Account</data>
+        <data key="name">Select Dotdigital Account</data>
         <data key="section">general</data>
         <data key="fieldName">account_select</data>
         <data key="value">0</data>

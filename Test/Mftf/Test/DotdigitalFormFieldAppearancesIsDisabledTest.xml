@@ -4,8 +4,8 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormFieldsAppearancesIsDisabled">
         <annotations>
-            <features value="Engagement Cloud for Magento Commerce module"/>
-            <stories value="dotdigital form content type for Page Builder"/>
+            <features value="Dotdigital for Magento Commerce module"/>
+            <stories value="Dotdigital form content type for Page Builder"/>
             <title value="The Appearances field changes state based on the value of Stop Displaying"/>
             <description value="The Appearances field will only be editable if the form is set to stop displaying 'After a number of appearances'."/>
             <severity value="AVERAGE"/>

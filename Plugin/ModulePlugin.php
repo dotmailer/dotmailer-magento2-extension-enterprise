@@ -8,7 +8,7 @@ use Magento\Framework\Module\ModuleListInterface;
 class ModulePlugin
 {
     const MODULE_NAME = 'Dotdigitalgroup_Enterprise';
-    const MODULE_DESCRIPTION = 'Engagement Cloud for Magento Commerce';
+    const MODULE_DESCRIPTION = 'Dotdigital for Magento Commerce';
 
     /**
      * @var ModuleListInterface

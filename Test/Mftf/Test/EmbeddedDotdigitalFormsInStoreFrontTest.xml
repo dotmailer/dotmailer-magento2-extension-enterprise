@@ -4,8 +4,8 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="TestEmbeddedDotdigitalFormsInStoreFront">
         <annotations>
-            <features value="Engagement Cloud for Magento Commerce module"/>
-            <stories value="dotdigital form content type for Page Builder"/>
+            <features value="Dotdigital for Magento Commerce module"/>
+            <stories value="Dotdigital form content type for Page Builder"/>
             <title value="The correct embedded form is visible on the store front"/>
             <description value="A form that is selected, with 'Embedded' style, is visible after save on the store front."/>
             <severity value="AVERAGE"/>
@@ -42,7 +42,7 @@
         <actionGroup ref="chooseVisualSelectOption" stepKey="enterAppearanceProperty">
             <argument name="property" value="DotdigitalFormStyle_Embedded"/>
         </actionGroup>
-        <!-- This requires a form to exist in Engagement Cloud with the name 'Test form' -->
+        <!-- This requires a form to exist in Dotdigital with the name 'Test form' -->
         <actionGroup ref="selectSlideOutPanelFieldGeneral" stepKey="selectDotdigitalForm">
             <argument name="property" value="DotdigitalFormSettings_FormSelect"/>
         </actionGroup>
