@@ -16,6 +16,11 @@ The latest version of this module is compatible with:
 - Magento >= 2.3.1
 - Dotdigitalgroup Email >= 4.8.0
 
+## 1.7.0
+
+###### Bug fixes
+- We fixed a bug that could prevent loading or editing of Dotdigital pages and forms in Page Builder, if the required access token had expired. 
+
 ## 1.5.0
 
 ###### Improvements
