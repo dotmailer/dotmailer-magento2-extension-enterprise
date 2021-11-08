@@ -62,13 +62,13 @@
         <data key="name">Show on mobile devices [not recommended]</data>
         <data key="section">general</data>
         <data key="fieldName">show_mobile</data>
-        <data key="value">0</data>
+        <data key="value">false</data>
     </entity>
     <entity name="DotdigitalFormSettings_UseOfEsc" type="dotdigital_form_field_property">
         <data key="name">Enable use of 'Esc' to dismiss pop-over</data>
         <data key="section">general</data>
         <data key="fieldName">enable_use_esc</data>
-        <data key="value">1</data>
+        <data key="value">true</data>
     </entity>
     <entity name="DotdigitalFormSettings_AddRespondent" type="dotdigital_form_field_property">
         <data key="name">Add respondent to the Newsletter Subscribers list</data>
