@@ -218,7 +218,6 @@
         <field name="show_mobile" sortOrder="80" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="default" xsi:type="string">0</item>
                     <item name="disabledValues" xsi:type="array">
                         <item name="none" xsi:type="string">embedded</item>
                     </item>
@@ -234,7 +233,16 @@
             <formElements>
                 <select>
                     <settings>
-                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">false</item>
+                                <item name="label" xsi:type="string" translate="true">No</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">true</item>
+                                <item name="label" xsi:type="string" translate="true">Yes</item>
+                            </option>
+                        </options>
                     </settings>
                 </select>
             </formElements>
