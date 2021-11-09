@@ -16,6 +16,11 @@ The latest version of this module is compatible with:
 - Magento >= 2.3.1
 - Dotdigitalgroup Email >= 4.8.0
 
+## 1.7.1
+
+##### Bug fixes
+- Dotdigital forms in pop-over mode now display in mobile viewports.
+
 ## 1.7.0
 
 ###### Bug fixes
