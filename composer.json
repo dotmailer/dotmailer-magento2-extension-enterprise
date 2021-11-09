@@ -2,7 +2,7 @@
     "name": "dotmailer/dotmailer-magento2-extension-enterprise",
     "description": "Dotdigital for Magento Commerce",
     "type": "magento2-module",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "license": "MIT",
     "repositories": [
         {
