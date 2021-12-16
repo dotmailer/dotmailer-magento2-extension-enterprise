@@ -14,7 +14,16 @@ This extension provides additional features for merchants running Magento Commer
 The latest version of this module is compatible with:
 
 - Magento >= 2.3.1
-- Dotdigitalgroup Email >= 4.8.0
+- `Dotdigitalgroup_Email` >= 4.14.0
+
+## 1.8.0-RC1
+
+##### What's new
+- This module has been renamed `dotdigital/dotdigital-magento2-extension-enterprise`.
+- We've added a new plugin to provide additional configuration values to our integration insight data cron.
+
+##### Improvements
+- `setup_version` has been removed from module.xml; in the Dashboard, we now use composer.json to provide the current active module version.
 
 ## 1.7.1
 
