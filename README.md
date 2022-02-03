@@ -11,7 +11,17 @@ The latest version of this module is compatible with:
 - `Dotdigitalgroup_Email` v4.14.0+
 
 ## Installation
-- This module is included in our Commerce metapackage. Please refer to [these instructions](https://github.com/dotmailer/dotmailer-magento2-extension#installation) to install via the Magento Marketplace.
+We encourage merchants to install our core modules via our combined **Dotdigital - Marketing Automation** extension, available on the [Magento Marketplace](https://marketplace.magento.com/dotdigital-dotdigital-magento2-os-package.html).
+
+**Steps:**
+1. First, ‘purchase’ the [core extension](https://marketplace.magento.com/dotdigital-dotdigital-magento2-os-package.html).
+2. Any existing `require` instructions in your composer.json relating to `dotmailer/*` packages must be removed.
+3. Now, require the correct packages.
+```
+composer require dotdigital/dotdigital-magento2-os-package
+composer require dotdigital/dotdigital-magento2-extension-enterprise
+```
+
 - [Full support documentation and setup guides](https://support.dotdigital.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options).
 
 ## Changelog
