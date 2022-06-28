@@ -22,6 +22,9 @@
                         master_template="Dotdigitalgroup_Enterprise/content-type/dotdigitalgroup-form/default/master"
                         reader="Magento_PageBuilder/js/master-format/read/configurable">
                 <elements>
+                    <element name="container">
+                        <attribute name="form_attachment" source="id"/>
+                    </element>
                     <element name="form">
                         <attribute name="account_select" source="data-account-id"/>
                         <attribute name="form_select" source="data-form-id"/>

@@ -313,4 +313,9 @@
             <dataType>text</dataType>
         </settings>
     </field>
+    <field name="form_attachment" formElement="hidden" sortOrder="150">
+        <settings>
+            <dataType>text</dataType>
+        </settings>
+    </field>
 </form>
