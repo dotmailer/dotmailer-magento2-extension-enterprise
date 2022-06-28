@@ -13,10 +13,10 @@ interface FormManagementInterface
     public function getFormOptions($websiteId);
 
     /**
+     * Get form data object by ID
+     *
      * @param int $formId
-     * @param int $websiteId
-     * @param string $formStyle
      * @return \Dotdigitalgroup\Enterprise\Api\Data\FormDataInterface
      */
-    public function getFormData($formId, $websiteId, $formStyle);
+    public function augmentFormData($formId);
 }

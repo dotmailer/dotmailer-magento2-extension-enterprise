@@ -7,7 +7,7 @@ use Dotdigitalgroup\Enterprise\Api\Data\FormDataInterface;
 class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements FormDataInterface
 {
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getFormName()
     {
@@ -15,8 +15,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @inheritDoc
      */
     public function setFormName($name)
     {
@@ -24,7 +23,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getFormPageId()
     {
@@ -32,8 +31,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @inheritDoc
      */
     public function setFormPageId($pageId)
     {
@@ -41,7 +39,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getFormDomain()
     {
@@ -49,8 +47,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @param string $domain
-     * @return $this
+     * @inheritDoc
      */
     public function setFormDomain($domain)
     {
@@ -58,7 +55,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getScriptSrc()
     {
@@ -66,8 +63,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @param string $src
-     * @return $this
+     * @inheritDoc
      */
     public function setScriptSrc($src)
     {
@@ -75,7 +71,7 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getFormSharing()
     {
@@ -83,11 +79,26 @@ class FormData extends \Magento\Framework\Api\AbstractSimpleObject implements Fo
     }
 
     /**
-     * @param string $sharing
-     * @return $this
+     * @inheritDoc
      */
     public function setFormSharing($sharing)
     {
         return $this->setData('form_sharing', $sharing);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFormAttachment()
+    {
+        return $this->_get('form_attachment');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFormAttachment($selector)
+    {
+        return $this->setData('form_attachment', $selector);
     }
 }
