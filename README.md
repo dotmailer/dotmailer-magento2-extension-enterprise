@@ -8,7 +8,7 @@ This extension provides additional features for merchants running Adobe Commerce
 ## Requirements
 The latest version of this module is compatible with:
 - Magento v2.3.1+
-- `Dotdigitalgroup_Email` v4.14.0+
+- `Dotdigitalgroup_Email` v4.18.0+
 
 ## Installation
 We encourage merchants to install our core modules via our combined **Dotdigital - Marketing Automation** extension, available on the [Magento Marketplace](https://marketplace.magento.com/dotdigital-dotdigital-magento2-os-package.html).

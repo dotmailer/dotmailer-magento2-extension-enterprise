@@ -2,7 +2,7 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-use Dotdigitalgroup\Email\Model\Apiconnector\CustomerDataFieldProvider;
+use Dotdigitalgroup\Email\Model\Customer\CustomerDataFieldProvider;
 use Dotdigitalgroup\Enterprise\Helper\Data;
 use Magento\Store\Api\Data\WebsiteInterface;
 

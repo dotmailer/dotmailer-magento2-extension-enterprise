@@ -14,8 +14,8 @@
         "dotmailer/dotmailer-magento2-extension-enterprise": "*"
     },
     "require": {
-        "php": "^7.1||^8.0",
-        "dotdigital/dotdigital-magento2-extension": "^4.14.0",
+        "php": "^7.2||^8.0",
+        "dotdigital/dotdigital-magento2-extension": "^4.18.0",
         "magento/framework": ">=101 <104",
         "magento/framework-foreign-key": ">=1.0.0",
         "magento/module-reward": ">=100 <102",

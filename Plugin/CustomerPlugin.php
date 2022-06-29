@@ -2,6 +2,7 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
+use Dotdigitalgroup\Email\Model\Connector\ContactData\Customer as CustomerContactData;
 use Magento\Reward\Model\ResourceModel\Reward\CollectionFactory;
 
 class CustomerPlugin
@@ -73,11 +74,11 @@ class CustomerPlugin
     }
 
     /**
-     * @param \Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject
-     * @param \Magento\Customer\Model\Customer $customer
+     * @param CustomerContactData $subject
+     *
      * @return mixed
      */
-    public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject)
+    public function beforeSetContactData(CustomerContactData $subject)
     {
         $this->customer = $subject->getModel();
         $websiteId = $this->customer->getWebsiteId();
