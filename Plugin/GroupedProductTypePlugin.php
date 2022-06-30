@@ -13,6 +13,8 @@ class GroupedProductTypePlugin
     private $productCollectionFactory;
 
     /**
+     * GroupedProductTypePlugin constructor.
+     *
      * @param CollectionFactory $productCollectionFactory
      */
     public function __construct(
@@ -22,6 +24,8 @@ class GroupedProductTypePlugin
     }
 
     /**
+     * After get parent
+     *
      * @param Grouped $groupedType
      * @param array $parentRowIds
      * @return array

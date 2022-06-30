@@ -3,10 +3,14 @@
 namespace Dotdigitalgroup\Enterprise\Model\Config\Source\PageBuilder;
 
 use Dotdigitalgroup\Email\Helper\Data;
+use Dotdigitalgroup\Email\Model\Apiconnector\Client;
+use Exception;
+use Magento\Framework\Data\OptionSourceInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\StoreManagerInterface;
 use Dotdigitalgroup\Email\Logger\Logger;
 
-class Accounts implements \Magento\Framework\Data\OptionSourceInterface
+class Accounts implements OptionSourceInterface
 {
     /**
      * @var Data
@@ -30,6 +34,7 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
 
     /**
      * Accounts constructor.
+     *
      * @param Data $data
      * @param StoreManagerInterface $storeManager
      * @param Logger $logger
@@ -48,7 +53,7 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
      * Get list of surveys and forms.
      *
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function toOptionArray()
     {
@@ -92,12 +97,15 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
     }
 
     /**
+     * Get owner of account email
+     *
      * @param int $websiteId
      * @return string|bool
-     * @throws \Exception
+     * @throws Exception
      */
     private function getAccountOwnerEmail($websiteId)
     {
+        /** @var \stdClass $accountInfo */
         $accountInfo = $this->helper->getWebsiteApiClient($websiteId)
             ->getAccountInfo();
 
@@ -113,7 +121,9 @@ class Accounts implements \Magento\Framework\Data\OptionSourceInterface
     }
 
     /**
-     * @param $properties
+     * Get email
+     *
+     * @param array $properties
      * @return string|bool
      */
     private function getEmailValueFromProperties($properties)

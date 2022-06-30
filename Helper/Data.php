@@ -2,9 +2,12 @@
 
 namespace Dotdigitalgroup\Enterprise\Helper;
 
+use Dotdigitalgroup\Email\Helper\Data as HelperDataAlias;
+use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Magento\Store\Model\ScopeInterface;
 
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+class Data extends AbstractHelper
 {
     /**
      * @var array
@@ -40,13 +43,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         ];
 
     /**
-     * @var \Dotdigitalgroup\Email\Helper\Data
+     * @var HelperDataAlias
      */
     private $emailHelper;
 
+    /**
+     * Data constructor.
+     *
+     * @param Context $context
+     * @param HelperDataAlias $emailHelper
+     */
     public function __construct(
         Context $context,
-        \Dotdigitalgroup\Email\Helper\Data $emailHelper
+        HelperDataAlias $emailHelper
     ) {
         $this->emailHelper = $emailHelper;
         parent::__construct($context);
@@ -56,15 +65,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * Enterprise data datafields attributes.
      *
      * @param mixed $website
-     *
      * @return array/null
-     *
      */
     public function getEnterpriseAttributes($website)
     {
         $mappedData = $this->scopeConfig->getValue(
             'connector_data_mapping/extra_data',
-            \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES,
+            ScopeInterface::SCOPE_WEBSITES,
             $website->getId()
         );
 
@@ -72,6 +79,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get enterprise fields
+     *
      * @return array
      */
     public function getEnterpriseDataFields()
@@ -80,7 +89,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $website
+     * Get reward point mapping configuration value
+     *
+     * @param int|string $website
      * @return mixed
      */
     public function getRewardPointMapping($website)
@@ -92,7 +103,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $website
+     * Get reward amount mapping configuration value
+     *
+     * @param int|string $website
      * @return mixed
      */
     public function getRewardAmountMapping($website)
@@ -104,7 +117,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $website
+     * Get customer segment mapping configuration value
+     *
+     * @param int|string $website
      * @return mixed
      */
     public function getCustomerSegmentMapping($website)
@@ -116,7 +131,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $website
+     * Get last used date mapping configuration value
+     *
+     * @param int|string $website
      * @return mixed
      */
     public function getLastUsedDateMapping($website)
@@ -128,7 +145,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $website
+     * Get expiration date mapping configuration value
+     *
+     * @param int|string $website
      * @return mixed
      */
     public function getExpirationDateMapping($website)

@@ -3,7 +3,12 @@
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
 use Dotdigitalgroup\Email\Model\Connector\ContactData\Customer as CustomerContactData;
+use Dotdigitalgroup\Enterprise\Helper\Data;
+use Magento\CustomerSegment\Model\ResourceModel\Customer;
+use Magento\Framework\Stdlib\DateTime;
+use Magento\Reward\Helper\Data as RewardHelper;
 use Magento\Reward\Model\ResourceModel\Reward\CollectionFactory;
+use Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory as RewardHistoryCollectionFactory;
 
 class CustomerPlugin
 {
@@ -13,7 +18,7 @@ class CustomerPlugin
     private $rewardDataFromHistory;
 
     /**
-     * @var \Magento\Framework\Stdlib\DateTime
+     * @var DateTime
      */
     private $dateTime;
 
@@ -23,17 +28,17 @@ class CustomerPlugin
     private $rewardCollectionFactory;
 
     /**
-     * @var \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory
+     * @var RewardHistoryCollectionFactory
      */
     private $rewardHistoryCollectionFactory;
 
     /**
-     * @var \Magento\CustomerSegment\Model\ResourceModel\Customer
+     * @var Customer
      */
     private $customerSegmentCustomerResource;
 
     /**
-     * @var \Magento\Reward\Helper\Data
+     * @var RewardHelper
      */
     private $rewardHelper;
 
@@ -43,27 +48,27 @@ class CustomerPlugin
     private $customer;
 
     /**
-     * @var \Dotdigitalgroup\Enterprise\Helper\Data
+     * @var Data
      */
     private $helper;
 
     /**
      * CustomerPlugin constructor.
      *
-     * @param \Magento\Framework\Stdlib\DateTime $dateTime
+     * @param DateTime $dateTime
      * @param CollectionFactory $rewardCollectionFactory
-     * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory
-     * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
-     * @param \Magento\Reward\Helper\Data $rewardHelper
-     * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
+     * @param RewardHistoryCollectionFactory $rewardHistoryCollectionFactory
+     * @param Customer $customerSegmentCustomerResource
+     * @param RewardHelper $rewardHelper
+     * @param Data $helper
      */
     public function __construct(
-        \Magento\Framework\Stdlib\DateTime $dateTime,
+        DateTime $dateTime,
         CollectionFactory $rewardCollectionFactory,
-        \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
-        \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
-        \Magento\Reward\Helper\Data $rewardHelper,
-        \Dotdigitalgroup\Enterprise\Helper\Data $helper
+        RewardHistoryCollectionFactory $rewardHistoryCollectionFactory,
+        Customer $customerSegmentCustomerResource,
+        RewardHelper $rewardHelper,
+        Data $helper
     ) {
         $this->dateTime = $dateTime;
         $this->rewardCollectionFactory = $rewardCollectionFactory;
@@ -74,8 +79,9 @@ class CustomerPlugin
     }
 
     /**
-     * @param CustomerContactData $subject
+     * Before send contact data
      *
+     * @param CustomerContactData $subject
      * @return mixed
      */
     public function beforeSetContactData(CustomerContactData $subject)
@@ -104,8 +110,11 @@ class CustomerPlugin
     }
 
     /**
+     * Fetch reward points balance
+     *
      * Fetch reward points balance from the magento_reward table.
-     * [Not from magento_reward_history because that doesn't accurately factor in expired rewards.]
+     * [Not from magento_reward_history because that doesn't
+     * accurately factor in expired rewards.]
      *
      * @return string
      */

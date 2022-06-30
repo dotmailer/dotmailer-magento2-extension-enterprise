@@ -5,14 +5,17 @@ namespace Dotdigitalgroup\Enterprise\Block;
 
 use Dotdigitalgroup\Email\Helper\Data;
 use Dotdigitalgroup\Enterprise\Model\Token\MagentoApiAccessToken;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 
 /**
  * DotdigitalForm block
  *
  * @api
  */
-class DotdigitalForm extends \Magento\Framework\View\Element\Template
+class DotdigitalForm extends Template
 {
     /**
      * @var Data
@@ -26,13 +29,14 @@ class DotdigitalForm extends \Magento\Framework\View\Element\Template
 
     /**
      * DotdigitalForm constructor.
-     * @param Template\Context $context
+     *
+     * @param Context $context
      * @param Data $emailHelper
      * @param MagentoApiAccessToken $magentoApiAccessToken
      * @param array $data
      */
     public function __construct(
-        Template\Context $context,
+        Context $context,
         Data $emailHelper,
         MagentoApiAccessToken $magentoApiAccessToken,
         array $data = []
@@ -43,8 +47,10 @@ class DotdigitalForm extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Is enabled check
+     *
      * @return bool
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function isEnabled(): bool
     {
@@ -54,9 +60,9 @@ class DotdigitalForm extends \Magento\Framework\View\Element\Template
     /**
      * Return the translated message for an invalid API key.
      *
-     * @return \Magento\Framework\Phrase
+     * @return Phrase
      */
-    public function getActivationMessage(): \Magento\Framework\Phrase
+    public function getActivationMessage(): Phrase
     {
         return __(
             "An active Dotdigital account is required to use this feature.
@@ -69,6 +75,8 @@ class DotdigitalForm extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get access token
+     *
      * @return string
      */
     public function getApiAccessToken()

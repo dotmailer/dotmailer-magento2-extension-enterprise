@@ -19,6 +19,7 @@ class MagentoApiAccessToken
 
     /**
      * MagentoApiAccessToken constructor.
+     *
      * @param TokenFactory $tokenFactory
      * @param Session $adminSession
      */
@@ -31,6 +32,8 @@ class MagentoApiAccessToken
     }
 
     /**
+     * Get access token for preview / page builder
+     *
      * @return string
      */
     public function getTokenForPreview()

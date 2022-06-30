@@ -39,7 +39,7 @@ class SegmentPlugin
      * Reimport customers following any change in conditions
      *
      * @param SegmentResource $segmentResource
-     * @param $result
+     * @param mixed $result
      * @param Segment $segment
      * @return SegmentResource
      */
@@ -53,6 +53,8 @@ class SegmentPlugin
     }
 
     /**
+     * Run reimport or segment customers
+     *
      * @param SegmentResource $segmentResource
      * @param Segment $segment
      */

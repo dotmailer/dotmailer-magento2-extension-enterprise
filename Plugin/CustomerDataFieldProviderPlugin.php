@@ -4,7 +4,6 @@ namespace Dotdigitalgroup\Enterprise\Plugin;
 
 use Dotdigitalgroup\Email\Model\Customer\CustomerDataFieldProvider;
 use Dotdigitalgroup\Enterprise\Helper\Data;
-use Magento\Store\Api\Data\WebsiteInterface;
 
 class CustomerDataFieldProviderPlugin
 {
@@ -25,7 +24,6 @@ class CustomerDataFieldProviderPlugin
      * Add enterprise data
      *
      * @param CustomerDataFieldProvider $customerDataFieldProvider
-     * @param WebsiteInterface $website
      * @param array $result
      * @return array
      */
