@@ -26,6 +26,16 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.9.0
+
+##### What’s new
+
+- We’ve updated our PageBuilder content type to ensure form display is not affected when JS scripts are deferred.
+
+##### Improvements
+
+- We updated our module in line with newer PHPStan and coding standards.
+
 ### 1.8.0
 
 ##### What's new
