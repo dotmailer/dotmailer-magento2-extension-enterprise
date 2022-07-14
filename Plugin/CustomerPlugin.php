@@ -2,27 +2,24 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
-use Magento\Reward\Model\ResourceModel\Reward\CollectionFactory;
+use Dotdigitalgroup\Enterprise\Helper\Data;
+use Magento\CustomerSegment\Model\ResourceModel\Customer;
+use Magento\Framework\Stdlib\DateTime;
+use Magento\Reward\Helper\Data as RewardHelper;
+use Magento\Reward\Model\Reward as RewardModel;
+use Magento\Reward\Model\Reward\History as RewardHistoryModel;
+use Magento\Reward\Model\RewardFactory;
+use Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory as RewardHistoryCollectionFactory;
 
 class CustomerPlugin
 {
     /**
-     * @var object
-     */
-    private $rewardDataFromHistory;
-
-    /**
-     * @var \Magento\Framework\Stdlib\DateTime
+     * @var DateTime
      */
     private $dateTime;
 
     /**
-     * @var CollectionFactory
-     */
-    private $rewardCollectionFactory;
-
-    /**
-     * @var \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory
+     * @var RewardHistoryCollectionFactory
      */
     private $rewardHistoryCollectionFactory;
 
@@ -32,7 +29,12 @@ class CustomerPlugin
     private $customerSegmentCustomerResource;
 
     /**
-     * @var \Magento\Reward\Helper\Data
+     * @var RewardFactory
+     */
+    private $rewardFactory;
+
+    /**
+     * @var RewardHelper
      */
     private $rewardHelper;
 
@@ -49,51 +51,65 @@ class CustomerPlugin
     /**
      * CustomerPlugin constructor.
      *
-     * @param \Magento\Framework\Stdlib\DateTime $dateTime
-     * @param CollectionFactory $rewardCollectionFactory
-     * @param \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory
-     * @param \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource
-     * @param \Magento\Reward\Helper\Data $rewardHelper
-     * @param \Dotdigitalgroup\Enterprise\Helper\Data $helper
+     * @param DateTime $dateTime
+     * @param RewardHistoryCollectionFactory $rewardHistoryCollectionFactory
+     * @param Customer $customerSegmentCustomerResource
+     * @param RewardHelper $rewardHelper
+     * @param RewardFactory $rewardFactory
+     * @param Data $helper
      */
     public function __construct(
-        \Magento\Framework\Stdlib\DateTime $dateTime,
-        CollectionFactory $rewardCollectionFactory,
-        \Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory $rewardHistoryCollectionFactory,
-        \Magento\CustomerSegment\Model\ResourceModel\Customer $customerSegmentCustomerResource,
-        \Magento\Reward\Helper\Data $rewardHelper,
-        \Dotdigitalgroup\Enterprise\Helper\Data $helper
+        DateTime $dateTime,
+        RewardHistoryCollectionFactory $rewardHistoryCollectionFactory,
+        Customer $customerSegmentCustomerResource,
+        RewardHelper $rewardHelper,
+        RewardFactory $rewardFactory,
+        Data $helper
     ) {
         $this->dateTime = $dateTime;
-        $this->rewardCollectionFactory = $rewardCollectionFactory;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
+        $this->rewardFactory = $rewardFactory;
         $this->rewardHelper = $rewardHelper;
         $this->helper = $helper;
     }
 
     /**
      * @param \Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject
-     * @param \Magento\Customer\Model\Customer $customer
      * @return mixed
      */
     public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject)
     {
         $this->customer = $subject->getModel();
+        $customerId = $this->customer->getId();
         $websiteId = $this->customer->getWebsiteId();
-        $this->rewardDataFromHistory = false;
+
+        $reward = $this->rewardFactory->create()
+            ->setCustomerId($customerId)
+            ->setWebsiteId($websiteId)
+            ->loadByCustomer();
+
+        $mostRecentRewardHistoryItem = $this->getRewardDataFromHistory($customerId, $websiteId);
 
         if ($this->helper->getRewardPointMapping($websiteId)) {
-            $this->customer->setRewardPoints($this->getRewardPoints());
+            $this->customer->setRewardPoints(
+                $this->getRewardPoints($reward)
+            );
         }
         if ($this->helper->getRewardAmountMapping($websiteId)) {
-            $this->customer->setRewardAmount($this->getRewardAmount());
+            $this->customer->setRewardAmount(
+                $this->getRewardAmount($reward)
+            );
         }
         if ($this->helper->getExpirationDateMapping($websiteId)) {
-            $this->customer->setExpirationDate($this->getExpirationDate());
+            $this->customer->setExpirationDate(
+                $this->getExpirationDate($mostRecentRewardHistoryItem)
+            );
         }
         if ($this->helper->getLastUsedDateMapping($websiteId)) {
-            $this->customer->setLastUsedDate($this->getLastUsedDate());
+            $this->customer->setLastUsedDate(
+                $this->getLastUsedDate($customerId, $websiteId)
+            );
         }
         if ($this->helper->getCustomerSegmentMapping($websiteId)) {
             $this->customer->setCustomerSegments($this->getCustomerSegments());
@@ -103,91 +119,82 @@ class CustomerPlugin
     }
 
     /**
-     * Fetch reward points balance from the magento_reward table.
-     * [Not from magento_reward_history because that doesn't accurately factor in expired rewards.]
+     * Fetch reward points balance.
      *
+     * @param RewardModel $reward
      * @return string
      */
-    public function getRewardPoints()
+    private function getRewardPoints(RewardModel $reward)
     {
-        $collection = $this->rewardCollectionFactory->create()
-            ->addFieldToFilter('customer_id', $this->customer->getId())
-            ->addWebsiteFilter($this->customer->getWebsiteId());
-
-        if ($collection->getSize()) {
-            return $collection->getFirstItem()->getPointsBalance();
-        }
-
-        return '';
+        return $reward->getPointsBalance() ?: '';
     }
 
     /**
      * Currency amount points.
      *
-     * @return mixed
+     * @param RewardModel $reward
+     * @return float|string
      */
-    public function getRewardAmount()
+    private function getRewardAmount(RewardModel $reward)
     {
-        if (!$this->rewardDataFromHistory) {
-            $this->setRewardDataFromHistory();
-        }
-
-        if ($this->rewardDataFromHistory !== true) {
-            return $this->rewardDataFromHistory->getCurrencyAmount();
-        }
-
-        return '';
+        return $reward->getCurrencyAmount() ?: '';
     }
 
     /**
      * Expiration date to use the points.
      *
+     * @param RewardHistoryModel $reward
      * @return string
      */
-    public function getExpirationDate()
+    private function getExpirationDate(RewardHistoryModel $reward)
     {
-        //set reward for later use
-        if (!$this->rewardDataFromHistory) {
-            $this->setRewardDataFromHistory();
-        }
-
-        if ($this->rewardDataFromHistory !== true) {
-            $expiredAt = $this->rewardDataFromHistory->getExpirationDate();
-
-            if ($expiredAt) {
-                $date = $this->dateTime->formatDate($expiredAt, true);
-            } else {
-                $date = '';
-            }
-
-            return $date;
-        }
-
-        return '';
+        $expiredAt = $reward->getExpirationDate();
+        return $expiredAt ? $this->dateTime->formatDate($expiredAt, true) : '';
     }
 
     /**
      * Get the customer reward.
      *
-     * @return void
+     * @param string $customerId
+     * @param string $websiteId
+     * @return RewardHistoryModel
      */
-    public function setRewardDataFromHistory()
+    private function getRewardDataFromHistory($customerId, $websiteId)
     {
-        $rewardData = $this->rewardHelper;
-        $historyCollectionFactory = $this->rewardHistoryCollectionFactory;
-        $collection = $historyCollectionFactory->create()
+        $collection = $this->rewardHistoryCollectionFactory->create()
             ->addCustomerFilter($this->customer->getId())
             ->addWebsiteFilter($this->customer->getWebsiteId())
-            ->setExpiryConfig($rewardData->getExpiryConfig())
+            ->setExpiryConfig($this->rewardHelper->getExpiryConfig())
             ->addExpirationDate($this->customer->getWebsiteId())
             ->skipExpiredDuplicates()
             ->setDefaultOrder();
 
-        $item = $collection->setPageSize(1)
+        return $collection->setPageSize(1)
             ->setCurPage(1)
             ->getFirstItem();
+    }
 
-        $this->rewardDataFromHistory = $item;
+    /**
+     * Last used reward points.
+     *
+     * Fetches the created_at of the most recent history row where points_delta was negative.
+     *
+     * @param string $customerId
+     * @param string $websiteId
+     * @return string
+     */
+    private function getLastUsedDate($customerId, $websiteId)
+    {
+        $lastUsed = $this->rewardHistoryCollectionFactory->create()
+            ->addCustomerFilter($customerId)
+            ->addWebsiteFilter($websiteId)
+            ->addFieldToFilter('points_delta', ['lt' => 0])
+            ->setDefaultOrder()
+            ->setPageSize(1)
+            ->getFirstItem()
+            ->getCreatedAt();
+
+        return ($lastUsed) ? $this->dateTime->formatDate($lastUsed, true) : '';
     }
 
     /**
@@ -195,7 +202,7 @@ class CustomerPlugin
      *
      * @return string
      */
-    public function getCustomerSegments()
+    private function getCustomerSegments()
     {
         $customerSegmentResource = $this->customerSegmentCustomerResource;
         $segmentIds = $customerSegmentResource->getCustomerWebsiteSegments(
@@ -205,31 +212,6 @@ class CustomerPlugin
 
         if (! empty($segmentIds)) {
             return implode(',', $segmentIds);
-        }
-
-        return '';
-    }
-
-    /**
-     * Last used reward points.
-     *
-     * @return string
-     */
-    public function getLastUsedDate()
-    {
-        $historyCollectionFactory = $this->rewardHistoryCollectionFactory;
-        //last used from the reward history based on the points delta used enterprise module
-        $lastUsed = $historyCollectionFactory->create()
-            ->addCustomerFilter($this->customer->getId())
-            ->addWebsiteFilter($this->customer->getWebsiteId())
-            ->addFieldToFilter('points_delta', ['lt' => 0])
-            ->setDefaultOrder()
-            ->setPageSize(1)
-            ->getFirstItem()
-            ->getCreatedAt();
-        //for any valid date
-        if ($lastUsed) {
-            return $this->dateTime->formatDate($lastUsed, true);
         }
 
         return '';
