@@ -11,9 +11,8 @@
     <type name="Dotdigitalgroup\Email\Model\Connector\Datafield">
         <plugin name="ddg_enterprise_data_field_plugin" type="Dotdigitalgroup\Enterprise\Plugin\DataFieldPlugin" sortOrder="1"/>
     </type>
-    <type name="Magento\CustomerSegment\Model\ResourceModel\Segment">
-        <plugin name="ddg_customer_segment_resource" type="Dotdigitalgroup\Enterprise\Plugin\SegmentPlugin"
-                sortOrder="1"/>
+    <type name="Magento\CustomerSegment\Model\ResourceModel\Customer\LinksMatcher">
+        <plugin name="ddg_customer_segment_resource" type="Dotdigitalgroup\Enterprise\Plugin\LinksMatcherPlugin" sortOrder="1"/>
     </type>
     <type name="Magento\GroupedProduct\Model\Product\Type\Grouped">
         <plugin name="ddg_grouped_product_type" type="Dotdigitalgroup\Enterprise\Plugin\GroupedProductTypePlugin" sortOrder="1"/>
