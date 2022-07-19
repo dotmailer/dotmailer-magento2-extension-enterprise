@@ -26,6 +26,15 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.9.1
+
+##### Improvements
+- Only active segments will now affect contacts (creating a new segment no longer resets all contacts if the segment status is set to Inactive).
+
+##### Bug fixes
+- Contacts were not being reset when matching customers were removed from a segment; this has been fixed.
+- We fixed a problem with inaccurate values for the REWARD_AMOUNT data field.
+
 ### 1.9.0
 
 ##### What’s new
