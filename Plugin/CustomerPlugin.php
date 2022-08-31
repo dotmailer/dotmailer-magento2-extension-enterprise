@@ -2,6 +2,7 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
+use Dotdigitalgroup\Email\Model\Connector\ContactData\Customer as CustomerContactData;
 use Dotdigitalgroup\Enterprise\Helper\Data;
 use Magento\CustomerSegment\Model\ResourceModel\Customer;
 use Magento\Framework\Stdlib\DateTime;
@@ -24,7 +25,7 @@ class CustomerPlugin
     private $rewardHistoryCollectionFactory;
 
     /**
-     * @var \Magento\CustomerSegment\Model\ResourceModel\Customer
+     * @var Customer
      */
     private $customerSegmentCustomerResource;
 
@@ -44,7 +45,7 @@ class CustomerPlugin
     private $customer;
 
     /**
-     * @var \Dotdigitalgroup\Enterprise\Helper\Data
+     * @var Data
      */
     private $helper;
 
@@ -75,10 +76,12 @@ class CustomerPlugin
     }
 
     /**
-     * @param \Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject
+     * Before send contact data
+     *
+     * @param CustomerContactData $subject
      * @return mixed
      */
-    public function beforeSetContactData(\Dotdigitalgroup\Email\Model\Apiconnector\Customer $subject)
+    public function beforeSetContactData(CustomerContactData $subject)
     {
         $this->customer = $subject->getModel();
         $customerId = $this->customer->getId();
@@ -142,7 +145,7 @@ class CustomerPlugin
 
     /**
      * Expiration date to use the points.
-     *
+
      * @param RewardHistoryModel $reward
      * @return string
      */

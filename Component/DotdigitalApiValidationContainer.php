@@ -19,6 +19,15 @@ class DotdigitalApiValidationContainer extends Container
      */
     private $helper;
 
+    /**
+     * Construct DotdigitalApiValidationContainer::class
+     *
+     * @param ContextInterface $context
+     * @param UrlInterface $url
+     * @param Data $helper
+     * @param array $components
+     * @param array $data
+     */
     public function __construct(
         ContextInterface $context,
         UrlInterface $url,

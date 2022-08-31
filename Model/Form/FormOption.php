@@ -7,7 +7,7 @@ use Dotdigitalgroup\Enterprise\Api\Data\FormOptionInterface;
 class FormOption extends \Magento\Framework\Api\AbstractSimpleObject implements FormOptionInterface
 {
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getValue()
     {
@@ -15,8 +15,7 @@ class FormOption extends \Magento\Framework\Api\AbstractSimpleObject implements 
     }
 
     /**
-     * @param string $value
-     * @return $this
+     * @inheritDoc
      */
     public function setValue($value)
     {
@@ -24,7 +23,7 @@ class FormOption extends \Magento\Framework\Api\AbstractSimpleObject implements 
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getLabel()
     {
@@ -32,8 +31,7 @@ class FormOption extends \Magento\Framework\Api\AbstractSimpleObject implements 
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @inheritDoc
      */
     public function setLabel($label)
     {

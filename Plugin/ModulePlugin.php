@@ -6,8 +6,8 @@ use Dotdigitalgroup\Email\Model\Connector\Module;
 
 class ModulePlugin
 {
-    const MODULE_NAME = 'Dotdigitalgroup_Enterprise';
-    const MODULE_DESCRIPTION = 'Dotdigital for Magento Commerce';
+    public const MODULE_NAME = 'Dotdigitalgroup_Enterprise';
+    public const MODULE_DESCRIPTION = 'Dotdigital for Magento Commerce';
 
     /**
      * @var Module
@@ -15,6 +15,8 @@ class ModulePlugin
     private $module;
 
     /**
+     * ModulePlugin constructor.
+     *
      * @param Module $module
      */
     public function __construct(Module $module)
@@ -23,6 +25,8 @@ class ModulePlugin
     }
 
     /**
+     * Before activate module
+     *
      * @param Module $module
      * @param array $modules
      * @return array

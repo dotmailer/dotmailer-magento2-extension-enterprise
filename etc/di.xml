@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Dotdigitalgroup\Email\Model\Apiconnector\Customer">
-        <plugin name="ddg_enterprise_customer_plugin" type="Dotdigitalgroup\Enterprise\Plugin\CustomerPlugin"
-                sortOrder="1"/>
+    <type name="Dotdigitalgroup\Email\Model\Connector\ContactData\Customer">
+        <plugin name="ddg_enterprise_customer_plugin" type="Dotdigitalgroup\Enterprise\Plugin\CustomerPlugin" sortOrder="1"/>
     </type>
-    <type name="Dotdigitalgroup\Email\Model\Apiconnector\CustomerDataFieldProvider">
+    <type name="Dotdigitalgroup\Email\Model\Customer\CustomerDataFieldProvider">
         <plugin name="ddg_enterprise_data_fields_plugin"
                 type="Dotdigitalgroup\Enterprise\Plugin\CustomerDataFieldProviderPlugin"/>
     </type>

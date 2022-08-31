@@ -17,6 +17,7 @@ class ConfigProviderPlugin
 
     /**
      * ConfigProviderPlugin constructor.
+     *
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
@@ -26,8 +27,10 @@ class ConfigProviderPlugin
     }
 
     /**
+     * After get configuration by store
+     *
      * @param DotdigitalConfig $subject
-     * @param $result
+     * @param array $result
      * @param string|int $storeId
      * @return array
      */
@@ -47,6 +50,8 @@ class ConfigProviderPlugin
     }
 
     /**
+     * Get paths
+     *
      * @return array
      */
     private function getPaths()

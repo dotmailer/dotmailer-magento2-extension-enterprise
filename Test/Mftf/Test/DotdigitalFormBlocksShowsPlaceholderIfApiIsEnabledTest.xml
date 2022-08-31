@@ -2,7 +2,7 @@
 
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
-    <test name="DotdigitalFormBlocksShowsPlaceholderIfApiIsEnabled">
+    <test name="DotdigitalFormBlocksShowsPlaceholderIfApiIsEnabledTest">
         <annotations>
             <features value="Dotdigital for Magento Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
