@@ -8,7 +8,7 @@ This extension provides additional features for merchants running Adobe Commerce
 ## Requirements
 The latest version of this module is compatible with:
 - Magento v2.3.1+
-- `Dotdigitalgroup_Email` v4.18.0+
+- `Dotdigitalgroup_Email` v4.19.0+
 
 ## Installation
 We encourage merchants to install our core modules via our combined **Dotdigital - Marketing Automation** extension, available on the [Magento Marketplace](https://marketplace.magento.com/dotdigital-dotdigital-magento2-os-package.html).
@@ -25,6 +25,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 - [Full support documentation and setup guides](https://support.dotdigital.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options).
 
 ## Changelog
+
+### 1.10.0
+
+##### Improvements
+- We updated some class references in line with the contact sync refactor in the Email module.
 
 ### 1.9.1
 
