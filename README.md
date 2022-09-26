@@ -26,6 +26,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.1
+
+##### Improvements
+- We added a `disabled` foreign key for email_catalog to the module, to resolve an error reported in Adobe Commerce.
+
 ### 1.10.0
 
 ##### Improvements
