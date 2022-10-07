@@ -120,7 +120,7 @@ class FormManagement implements FormManagementInterface
             'domain' => $scriptDomain,
             'attach' => "#{$formAttachment}",
             'delay' => (int) $postContent->show_after,
-            'appearance' =>  $postContent->appearance,
+            'appearance' =>  $postContent->appearances,
             'keydismiss' => (bool) $postContent->enable_use_esc,
             'mobile' => (bool) $postContent->show_mobile,
             'sharing' => $scriptSharing,

@@ -117,7 +117,7 @@ define([
                     'form_style',
                     'form_sharing',
                     'show_after',
-                    'appearance',
+                    'appearances',
                     'enable_use_esc',
                     'show_mobile',
                     'add_respondent',
