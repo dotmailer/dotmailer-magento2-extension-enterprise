@@ -26,6 +26,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.2
+
+##### Bug fixes
+- Pages and forms embedded via Page Builder now once again respect the ‘Stop displaying after a number of appearances’ value.
+
 ### 1.10.1
 
 ##### Improvements
