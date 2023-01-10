@@ -6,7 +6,7 @@ define([
 
     return function (config, element) {
         let formId = $(element).find('iframe').attr('id');
-        let shouldSubscribe = $(element).find('script').data('add-respondent') === 1;
+        let shouldSubscribe = $(element).find('script[data-form-id]').data('add-respondent') === 1;
 
         ecPF.onComplete(function (formData) {
             let hasContactEmail = formData.contactEmail != null && formData.contactEmail.length > 0;

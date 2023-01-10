@@ -26,6 +26,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.3
+
+##### Improvements
+- Our Page Builder content type now uses a more specific selector for targeting its `script` element.
+
 ### 1.10.2
 
 ##### Bug fixes
