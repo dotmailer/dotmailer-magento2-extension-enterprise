@@ -8,7 +8,6 @@ use Dotdigitalgroup\Enterprise\Api\Data\FormOptionInterfaceFactory;
 use Dotdigitalgroup\Enterprise\Api\FormManagementInterface;
 use Dotdigitalgroup\Email\Helper\Data;
 use Magento\Framework\Webapi\Rest\Request;
-use Magento\Store\Model\StoreManagerInterface;
 
 class FormManagement implements FormManagementInterface
 {
@@ -21,11 +20,6 @@ class FormManagement implements FormManagementInterface
      * @var Data
      */
     private $helper;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
 
     /**
      * @var FormOptionInterfaceFactory
@@ -44,20 +38,17 @@ class FormManagement implements FormManagementInterface
 
     /**
      * @param Data $data
-     * @param StoreManagerInterface $storeManager
      * @param FormOptionInterfaceFactory $formOptionFactory
      * @param FormDataInterfaceFactory $formDataFactory
      * @param Request $request
      */
     public function __construct(
         Data $data,
-        StoreManagerInterface $storeManager,
         FormOptionInterfaceFactory $formOptionFactory,
         FormDataInterfaceFactory $formDataFactory,
         Request $request
     ) {
         $this->helper = $data;
-        $this->storeManager = $storeManager;
         $this->formOptionFactory = $formOptionFactory;
         $this->formDataFactory = $formDataFactory;
         $this->request = $request;
@@ -144,7 +135,7 @@ class FormManagement implements FormManagementInterface
      */
     private function getPost(): \stdClass
     {
-        return json_decode($this->request->getContent());
+        return (object) $this->request->getPost('form_data');
     }
 
     /**

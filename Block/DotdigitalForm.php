@@ -4,7 +4,6 @@
 namespace Dotdigitalgroup\Enterprise\Block;
 
 use Dotdigitalgroup\Email\Helper\Data;
-use Dotdigitalgroup\Enterprise\Model\Token\MagentoApiAccessToken;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 use Magento\Framework\View\Element\Template;
@@ -23,27 +22,19 @@ class DotdigitalForm extends Template
     private $emailHelper;
 
     /**
-     * @var MagentoApiAccessToken
-     */
-    private $magentoApiAccessToken;
-
-    /**
      * DotdigitalForm constructor.
      *
      * @param Context $context
      * @param Data $emailHelper
-     * @param MagentoApiAccessToken $magentoApiAccessToken
      * @param array $data
      */
     public function __construct(
         Context $context,
         Data $emailHelper,
-        MagentoApiAccessToken $magentoApiAccessToken,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->emailHelper = $emailHelper;
-        $this->magentoApiAccessToken = $magentoApiAccessToken;
     }
 
     /**
@@ -72,15 +63,5 @@ class DotdigitalForm extends Template
                 ['_fragment' => 'cms_pagebuilder']
             )
         );
-    }
-
-    /**
-     * Get access token
-     *
-     * @return string
-     */
-    public function getApiAccessToken()
-    {
-        return $this->magentoApiAccessToken->getTokenForPreview();
     }
 }

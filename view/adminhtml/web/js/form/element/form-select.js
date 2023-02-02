@@ -1,8 +1,9 @@
 define([
     'Magento_Ui/js/form/element/select',
     'jquery',
-    'mage/url'
-], function (Select, $, url) {
+    'mage/url',
+    'module'
+], function (Select, $, url, module) {
     'use strict';
 
     return Select.extend({
@@ -10,16 +11,15 @@ define([
             disabled: true,
             caption: '-- Please Select --',
             imports: {
-                accessToken: '${ $.provider }:data.magento_api_access_token',
                 baseUrl: '${ $.provider }:data.base_url',
                 accountId: '${ $.provider }:data.account_select'
             },
             listens: {
-                accessToken: 'setApiAccessToken',
                 baseUrl: 'setBaseUrl',
                 accountId: 'fetchECForms'
             },
-            previouslySelectedValue: ''
+            previouslySelectedValue: '',
+            formOptionsControllerUrl: module.config().ddgFormOptionsUrl
         },
 
         /**
@@ -54,27 +54,13 @@ define([
             }
 
             $.ajax({
-                url: url.build('rest/V1/dotdigital/forms/' + websiteId),
+                url: url.build(this.formOptionsControllerUrl + '?website_id=' + websiteId),
                 method: 'GET',
                 dataType: 'JSON',
                 contentType: 'application/json',
-
-                /**
-                 * @param {Object} xhr
-                 */
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + _this2.token);
-                }
             }).done(function (response) {
                 _this2.setOptions(response);
             });
-        },
-
-        /**
-         * @param {String} token
-         */
-        setApiAccessToken: function (token) {
-            this.token = token;
         },
 
         /**
