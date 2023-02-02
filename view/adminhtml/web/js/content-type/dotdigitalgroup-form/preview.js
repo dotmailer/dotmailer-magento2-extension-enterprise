@@ -21,17 +21,16 @@ define([
                 _this.hiddenData = null;
                 _this.apiEnabled = _knockout.observable(!!_module.config().isDDGEnabled);
                 _this.apiErrorMessage = _module.config().apiErrorMessage;
+                _this.formDataControllerUrl = _module.config().ddgFormDataUrl;
                 _this.messages = {
                     NOT_SELECTED: (0, _translate)('Edit to select a survey or form'),
                     UNKNOWN_ERROR: (0, _translate)('An unknown error occurred. Please try again.')
                 };
                 _this.placeholderText = _knockout.observable(_this.messages.NOT_SELECTED);
-                _this.accessToken = _module.config().token;
                 _this.baseUrl = this.contentType.config.additional_data.formConfig.baseUrl;
 
                 _events.on('contentType:mountAfter', function (args) {
                     if (args.contentType.id === this.contentType.id) {
-                        this.contentType.dataStore.set('magento_api_access_token', this.accessToken);
                         this.contentType.dataStore.set('base_url', this.baseUrl);
                     }
                 }.bind(this));
@@ -110,7 +109,6 @@ define([
             _proto.getFormData = function getFormData(data, callback) {
 
                 let formId = data.form_select;
-                let token = data.magento_api_access_token;
                 let postFormData = {}
                 let postKeys = [
                     'account_select',
@@ -136,24 +134,16 @@ define([
                     return;
                 }
 
-                $.ajaxSetup({
+                $.ajax({
+                    type: 'POST',
                     dataType: 'JSON',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    beforeSend: function(jqXHR, settings) {
-                        settings.url = settings.url + '?' + $.param({isAjax:true});
-                        return true;
+                    url: url.build(this.formDataControllerUrl + '?form_id=' + formId),
+                    data: {
+                        form_data: postFormData,
+                        form_key: window.FORM_KEY
                     }
                 })
-
-                $.post(
-                    url.build('rest/V1/dotdigital/formData/' + formId),
-                    JSON.stringify(postFormData)
-                ).done((response) => callback(data, response))
+                .done((response) => callback(data, response))
             };
 
             _proto.appendFormData = function setFormData(data, additionalData) {

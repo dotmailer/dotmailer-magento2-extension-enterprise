@@ -109,7 +109,6 @@
                         <rule name="required-entry" xsi:type="boolean">true</rule>
                     </validation>
                     <imports>
-                        <link name="accessToken">${ $.provider }:data.magento_api_access_token</link>
                         <link name="accountId">${ $.provider }:data.account_select</link>
                         <link name="baseUrl">${ $.provider }:data.base_url</link>
                     </imports>
