@@ -26,6 +26,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.4
+
+##### Bug fixes
+- Merchants using Basic Auth to secure their Magento admin can now use our Page Builder content type as expected.
+
 ### 1.10.3
 
 ##### Improvements
