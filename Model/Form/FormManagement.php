@@ -139,15 +139,15 @@ class FormManagement implements FormManagementInterface
     }
 
     /**
-     * Extract the page id from the form URL e.g. 001ln562-3411pu49
+     * Extract the page id from the form URL e.g. 52SG-3ML/heading
      *
      * @param string $url
      * @return string
      */
     private function extractPageId($url)
     {
-        $bits = explode('/', $url);
-        return array_reverse($bits)[1].'/'.array_reverse($bits)[0];
+        $bits = explode('/p/', $url);
+        return $bits[1];
     }
 
     /**
