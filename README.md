@@ -26,6 +26,14 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.5
+
+##### Improvements
+- Missing tables or other exceptions thrown in the Enterprise CustomerPlugin will no longer prevent other data fields being synced in customer sync.
+
+##### Bug fixes
+- We fixed a Page Builder issue with embedding pages or forms that did not have headings when their links were generated.
+
 ### 1.10.4
 
 ##### Bug fixes

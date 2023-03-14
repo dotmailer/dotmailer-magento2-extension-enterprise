@@ -2,6 +2,7 @@
 
 namespace Dotdigitalgroup\Enterprise\Plugin;
 
+use Dotdigitalgroup\Email\Logger\Logger;
 use Dotdigitalgroup\Email\Model\Connector\ContactData\Customer as CustomerContactData;
 use Dotdigitalgroup\Enterprise\Helper\Data;
 use Magento\CustomerSegment\Model\ResourceModel\Customer;
@@ -14,6 +15,11 @@ use Magento\Reward\Model\ResourceModel\Reward\History\CollectionFactory as Rewar
 
 class CustomerPlugin
 {
+    /**
+     * @var Logger
+     */
+    private $logger;
+
     /**
      * @var DateTime
      */
@@ -52,6 +58,7 @@ class CustomerPlugin
     /**
      * CustomerPlugin constructor.
      *
+     * @param Logger $logger
      * @param DateTime $dateTime
      * @param RewardHistoryCollectionFactory $rewardHistoryCollectionFactory
      * @param Customer $customerSegmentCustomerResource
@@ -60,6 +67,7 @@ class CustomerPlugin
      * @param Data $helper
      */
     public function __construct(
+        Logger $logger,
         DateTime $dateTime,
         RewardHistoryCollectionFactory $rewardHistoryCollectionFactory,
         Customer $customerSegmentCustomerResource,
@@ -67,6 +75,7 @@ class CustomerPlugin
         RewardFactory $rewardFactory,
         Data $helper
     ) {
+        $this->logger = $logger;
         $this->dateTime = $dateTime;
         $this->rewardHistoryCollectionFactory = $rewardHistoryCollectionFactory;
         $this->customerSegmentCustomerResource = $customerSegmentCustomerResource;
@@ -87,38 +96,89 @@ class CustomerPlugin
         $customerId = $this->customer->getId();
         $websiteId = $this->customer->getWebsiteId();
 
-        $reward = $this->rewardFactory->create()
-            ->setCustomerId($customerId)
-            ->setWebsiteId($websiteId)
-            ->loadByCustomer();
-
-        $mostRecentRewardHistoryItem = $this->getRewardDataFromHistory($customerId, $websiteId);
-
-        if ($this->helper->getRewardPointMapping($websiteId)) {
-            $this->customer->setRewardPoints(
-                $this->getRewardPoints($reward)
-            );
-        }
-        if ($this->helper->getRewardAmountMapping($websiteId)) {
-            $this->customer->setRewardAmount(
-                $this->getRewardAmount($reward)
-            );
-        }
-        if ($this->helper->getExpirationDateMapping($websiteId)) {
-            $this->customer->setExpirationDate(
-                $this->getExpirationDate($mostRecentRewardHistoryItem)
-            );
-        }
-        if ($this->helper->getLastUsedDateMapping($websiteId)) {
-            $this->customer->setLastUsedDate(
-                $this->getLastUsedDate($customerId, $websiteId)
-            );
-        }
-        if ($this->helper->getCustomerSegmentMapping($websiteId)) {
-            $this->customer->setCustomerSegments($this->getCustomerSegments());
-        }
+        $this->setRewardData($customerId, $websiteId);
+        $this->setCustomerSegmentData($customerId, $websiteId);
 
         return null;
+    }
+
+    /**
+     * Set reward data fields.
+     *
+     * @param string $customerId
+     * @param string $websiteId
+     *
+     * @return void
+     */
+    private function setRewardData($customerId, $websiteId)
+    {
+        try {
+            if ($this->helper->getRewardPointMapping($websiteId) ||
+                $this->helper->getRewardAmountMapping($websiteId) ||
+                $this->helper->getExpirationDateMapping($websiteId) ||
+                $this->helper->getLastUsedDateMapping($websiteId)) {
+
+                $reward = $this->rewardFactory->create()
+                    ->setCustomerId($customerId)
+                    ->setWebsiteId($websiteId)
+                    ->loadByCustomer();
+
+                if ($this->helper->getRewardPointMapping($websiteId)) {
+                    $this->customer->setRewardPoints(
+                        $this->getRewardPoints($reward)
+                    );
+                }
+                if ($this->helper->getRewardAmountMapping($websiteId)) {
+                    $this->customer->setRewardAmount(
+                        $this->getRewardAmount($reward)
+                    );
+                }
+                if ($this->helper->getExpirationDateMapping($websiteId)) {
+                    $mostRecentRewardHistoryItem = $this->getRewardDataFromHistory($customerId, $websiteId);
+                    $this->customer->setExpirationDate(
+                        $this->getExpirationDate($mostRecentRewardHistoryItem)
+                    );
+                }
+                if ($this->helper->getLastUsedDateMapping($websiteId)) {
+                    $this->customer->setLastUsedDate(
+                        $this->getLastUsedDate($customerId, $websiteId)
+                    );
+                }
+            }
+        } catch (\Exception $e) {
+            $this->logger->debug(
+                sprintf(
+                    'Error exporting reward data for customer id: %d',
+                    $customerId
+                ),
+                [(string) $e]
+            );
+        }
+    }
+
+    /**
+     * Set customer segment data fields.
+     *
+     * @param string $customerId
+     * @param string $websiteId
+     *
+     * @return void
+     */
+    private function setCustomerSegmentData($customerId, $websiteId)
+    {
+        try {
+            if ($this->helper->getCustomerSegmentMapping($websiteId)) {
+                $this->customer->setCustomerSegments($this->getCustomerSegments());
+            }
+        } catch (\Exception $e) {
+            $this->logger->debug(
+                sprintf(
+                    'Error exporting segment data for customer id: %d',
+                    $customerId
+                ),
+                [(string) $e]
+            );
+        }
     }
 
     /**
