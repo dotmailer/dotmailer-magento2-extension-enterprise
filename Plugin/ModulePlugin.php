@@ -7,7 +7,7 @@ use Dotdigitalgroup\Email\Model\Connector\Module;
 class ModulePlugin
 {
     public const MODULE_NAME = 'Dotdigitalgroup_Enterprise';
-    public const MODULE_DESCRIPTION = 'Dotdigital for Magento Commerce';
+    public const MODULE_DESCRIPTION = 'Dotdigital for Adobe Commerce';
 
     /**
      * @var Module

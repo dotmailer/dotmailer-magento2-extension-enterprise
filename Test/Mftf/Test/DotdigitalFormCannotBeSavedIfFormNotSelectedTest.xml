@@ -4,7 +4,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormCannotBeSavedIfFormNotSelectedTest">
         <annotations>
-            <features value="Dotdigital for Magento Commerce module"/>
+            <features value="Dotdigital for Adobe Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
             <title value="The settings cannot be saved if a form is not selected"/>
             <description value="Confirms that validation in the editor requires a value to be selected in the Select Form dropdown."/>

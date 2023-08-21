@@ -4,7 +4,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormBlocksShowsPlaceholderIfApiIsEnabledTest">
         <annotations>
-            <features value="Dotdigital for Magento Commerce module"/>
+            <features value="Dotdigital for Adobe Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
             <title value="Test the active default state of the Dotdigital form content type"/>
             <description value="If there is a valid Dotdigital API connection, the content type will display an empty placeholder when dragged to the stage."/>

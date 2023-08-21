@@ -1,6 +1,6 @@
 {
     "name": "dotdigital/dotdigital-magento2-extension-enterprise",
-    "description": "Dotdigital for Magento Commerce",
+    "description": "Dotdigital for Adobe Commerce",
     "type": "magento2-module",
     "version": "1.10.5",
     "license": "MIT",
