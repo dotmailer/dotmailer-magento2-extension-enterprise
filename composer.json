@@ -14,20 +14,20 @@
         "dotmailer/dotmailer-magento2-extension-enterprise": "*"
     },
     "require": {
-        "php": "^7.2||^8.0",
+        "php": "^7.4||^8.0",
         "dotdigital/dotdigital-magento2-extension": "^4.19.0",
-        "magento/framework": ">=101 <104",
+        "magento/framework": ">=102 <104",
         "magento/framework-foreign-key": ">=1.0.0",
-        "magento/module-reward": ">=100 <102",
-        "magento/module-customer-segment": ">=100 <103",
-        "magento/module-store": ">=100 <102",
+        "magento/module-reward": ">=101 <102",
+        "magento/module-customer-segment": ">=102 <103",
+        "magento/module-store": ">=101 <102",
         "magento/module-page-builder": ">=1.0.0",
         "magento/page-builder-commerce": ">=1.0.0",
-        "magento/module-ui": ">=100 <102",
-        "magento/module-integration": "100.*",
-        "magento/module-backend": ">=100 <103",
-        "magento/module-catalog": ">=101 <105",
-        "magento/module-grouped-product": "100.*"
+        "magento/module-ui": ">=101 <102",
+        "magento/module-backend": ">=101 <103",
+        "magento/module-catalog": ">=103 <105",
+        "magento/module-grouped-product": "^100.3|^100.4",
+        "ext-pcre": "*"
     },
     "autoload": {
         "files": [ "registration.php" ],
