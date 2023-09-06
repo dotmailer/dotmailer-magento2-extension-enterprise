@@ -7,7 +7,8 @@ This extension provides additional features for merchants running Adobe Commerce
 
 ## Requirements
 The latest version of this module is compatible with:
-- Magento v2.3.1+
+- Magento v2.4.1-p1+
+  - Magento 2.3.1-2.4.1 are compatible up to version 1.9.0
 - `Dotdigitalgroup_Email` v4.19.0+
 
 ## Installation
@@ -25,6 +26,11 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 - [Full support documentation and setup guides](https://support.dotdigital.com/hc/en-gb/articles/216701227-Enterprise-data-sync-options).
 
 ## Changelog
+
+### 1.10.6
+
+##### Improvements
+- We've updated the module’s dependencies. The module now requires PHP 7.4+ and Magento 2.4.1-p1+.
 
 ### 1.10.5
 
