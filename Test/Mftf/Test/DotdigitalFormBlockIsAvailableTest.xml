@@ -4,7 +4,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormBlockIsAvailableTest">
         <annotations>
-            <features value="Dotdigital for Magento Commerce module"/>
+            <features value="Dotdigital for Adobe Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
             <title value="Test that the Dotdigital form content type is available in the Page Builder panel"/>
             <description value="Validates that the Dotdigital form content type is available to use in Page Builder."/>

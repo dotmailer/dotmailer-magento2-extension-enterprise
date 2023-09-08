@@ -4,7 +4,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="DotdigitalFormFieldsAreEnabledWhenPopoverTest">
         <annotations>
-            <features value="Dotdigital for Magento Commerce module"/>
+            <features value="Dotdigital for Adobe Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
             <title value="Form fields are enabled when the Pop-over style is selected"/>
             <description value="Setting Style to 'Pop-over' enables most other settings."/>

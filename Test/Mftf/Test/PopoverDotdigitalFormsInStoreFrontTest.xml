@@ -4,7 +4,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="TestPopoverDotdigitalFormsInStoreFrontTest">
         <annotations>
-            <features value="Dotdigital for Magento Commerce module"/>
+            <features value="Dotdigital for Adobe Commerce module"/>
             <stories value="Dotdigital form content type for Page Builder"/>
             <title value="The correct pop-over form is visible on the store front"/>
             <description value="A form that is selected, with 'Pop-over' style, is visible after save on the store front."/>
