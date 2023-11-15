@@ -35,7 +35,6 @@
                         <attribute name="appearances" source="data-appearances"/>
                         <attribute name="show_mobile" source="data-mobile"/>
                         <attribute name="enable_use_esc" source="data-key-dismiss"/>
-                        <attribute name="add_respondent" source="data-add-respondent"/>
                         <attribute name="script_src" source="src"/>
                         <attribute name="form_page_id" source="data-page-id"/>
                         <attribute name="form_domain" source="data-page-domain"/>
@@ -45,6 +44,7 @@
                         <style name="display" source="display" converter="Magento_PageBuilder/js/converter/style/display" preview_converter="Magento_PageBuilder/js/converter/style/preview/display"/>
                         <attribute name="name" source="data-content-type"/>
                         <attribute name="appearance" source="data-appearance"/>
+                        <attribute name="add_respondent" source="data-add-respondent"/>
                     </element>
                 </elements>
             </appearance>
