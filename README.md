@@ -27,6 +27,9 @@ composer require dotdigital/dotdigital-magento2-extension-enterprise
 
 ## Changelog
 
+### 1.10.7
+- Deferred scripts could break the ‘Add Respondent to the Newsletter Subscribers list’ function on our Page Builder forms. This has been fixed.
+
 ### 1.10.6
 
 ##### Improvements
