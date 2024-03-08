@@ -2,7 +2,7 @@
     "name": "dotdigital/dotdigital-magento2-extension-enterprise",
     "description": "Dotdigital for Adobe Commerce",
     "type": "magento2-module",
-    "version": "1.10.7",
+    "version": "2.0.0",
     "license": "MIT",
     "repositories": [
         {
@@ -21,8 +21,6 @@
         "magento/module-reward": ">=101 <102",
         "magento/module-customer-segment": ">=102 <103",
         "magento/module-store": ">=101 <102",
-        "magento/module-page-builder": ">=1.0.0",
-        "magento/page-builder-commerce": ">=1.0.0",
         "magento/module-ui": ">=101 <102",
         "magento/module-backend": ">=101 <103",
         "magento/module-catalog": ">=103 <105",
